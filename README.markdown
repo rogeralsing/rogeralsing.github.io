@@ -1,129 +1,41 @@
-Simple Jekyll Site
-===
+## What is Octopress?
 
-[![endorse](https://api.coderwall.com/luke/endorsecount.png)](https://coderwall.com/luke)
+Octopress is [Jekyll](https://github.com/mojombo/jekyll) blogging at its finest.
 
-This is an example of a very basic Jekyll site. It lays down the basic folder structure, uses very basic CSS to make it look presentable and leaves everything else up to you.
+1. **Octopress sports a clean responsive theme** written in semantic HTML5, focused on readability and friendliness toward mobile devices.
+2. **Code blogging is easy and beautiful.** Embed code (with [Solarized](http://ethanschoonover.com/solarized) styling) in your posts from gists, jsFiddle or from your filesystem.
+3. **Third party integration is simple** with built-in support for Pinboard, Delicious, GitHub Repositories, Disqus Comments and Google Analytics.
+4. **It's easy to use.** A collection of rake tasks simplifies development and makes deploying a cinch.
+5. **Ships with great plug-ins** some original and others from the Jekyll community &mdash; tested and improved.
 
-This is a perfect starting point for building your own Jekyll site.
+**Note**: Octopress requires a minimum Ruby version of `1.9.3-p0`.
 
-Requirements
-------------
+## Documentation
 
-Development time dependencies:
+Check out [Octopress.org](http://octopress.org/docs) for guides and documentation.
+It should all apply to our current stable version (found in the `master`
+branch). If this is not the case, [please submit a
+fix to our docs repo](https://github.com/octopress/docs).
 
-* [Ruby][rb]
-* [Gems][gm]
-* [Jekyll][jk]
-* [Rdiscount][rd] (optional - comment out in `_confing.yaml` to use Maroku)
-* [Node.js][no] & [Grunt.js][gr] (optional - only if you wish to use GruntJS)
+## Contributing
 
-Run-time dependencies:
+[![Build Status](https://travis-ci.org/imathis/octopress.png?branch=master)](https://travis-ci.org/imathis/octopress)
 
-* A web server (any will do)
-
-
-Beginners Guide
----------------
-
-To use this template:
-
-1. Clone to some directory
-* Modify `_config.yaml` with your name, blog title, description and etc...
-* Tweak `style.css` and HTML files in `_layouts` to personalize
-* Create blog entries in `_posts/` - work off the sample posts there
-* Run `jekyll serve` to generate site locally
-* View it by going to `http://localhost:4000` and make sure it looks good
-* If all is well, upload contents of `_site` to your server
-* Repeat steps 4-7 to update blog
-
-Features
---------
-
-Following features are available:
-
-* Automatically generate a valid RSS feed (see feed.xml in root directory).
-* Automatically generate a valid Google Sitemap (see sitemap.xml in root directory).
-* Organize your posts into categories and automatically generate category index pages.
-* Can be deployed in a subdirectory
-
-Using Categories
-----------------
-
-To use the category feature simply add category tag at the top of your post:
-
-    category: some_category_name
-
-You can specify multiple categories using a comma separated list.
-
-Known Issues
-------------
-
-The plugins in the `_plugins` directory are not compatible with Github pages. If you want to deploy your site to Github, you might need to give up on these plugins.
-
-Deploying to Subdirectory
--------------------------
-
-You can deploy to a subdirectory. For example instead of running your site at `http://foo.tld/` you can instead put it in `http://foo.tld/blog/`. To do this use the `url` and  `baseurl` settings in `_config.yaml`. The former is used for absolute links (like in the RSS feed) while the latter is used for relative links (like everywhere on the front page). For example if you set it to:
-
-    baseurl: /blog
-    url: http://foo.tld/blog
-
-Then the html files will still be generated in `_site` but all the links will be generated either relative to `/blog` or using the absolute url of `http://foo.tld/blog`. 
-
-**Note**: when you run the built-in Jekyll server you will need to access your site by going to `http://localhost:4000/blog`.
-
-Linting & Validation
----
-
-You can use [Grunt.js][gr] to automatically validate the HTML in your generated site. First install the dependencies:
-
-    npm install
-
-You can use the following Grunt commands:
-
-- `grunt jshint` - to lint your `scripts.js` file using JSHint
-- `grunt csslint` - to lint your `styles.css` file
-- `grunt validation` - to validate all the HTML files in `_site`
-
-Please note that validation is done against the W3C server. If you have many pages, you may get temporarily locked out for abuse.
-
-To lint js and css simultaneously simply run `grunt` with no parameters. Validation is only on-demand because of the potential lockout.
+We love to see people contributing to Octopress, whether it's a bug report, feature suggestion or a pull request. At the moment, we try to keep the core slick and lean, focusing on basic blogging needs, so some of your suggestions might not find their way into Octopress. For those ideas, we started a [list of 3rd party plug-ins](https://github.com/imathis/octopress/wiki/3rd-party-plugins), where you can link your own Octopress plug-in repositories. For the future, we're thinking about ways to easier add them into our main releases.
 
 
-Credits
--------
+## License
+(The MIT License)
 
-This sample layout uses plugins created by [Dave Perret][dp] to generate categories and sitemaps. Credit where credit is due. Please see the `_plugins` directory for details.
+Copyright © 2009-2013 Brandon Mathis
 
-The web font icons have been created based on the [Typicon][ty] set and customized via the [Fontello][fo] service.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-Screenshots
------------
-
-Just so you can see how it looks:
-
-Front page:  
-  
-![Front Page](http://i.imgur.com/WeXFkWn.jpg) 
-  
-Individual post:
-  
-![Individual post](http://i.imgur.com/o6sSJEt.jpg) 
-  
-Archive page:
-  
-![Archive page](http://i.imgur.com/Fmy6FPt.jpg) 
+THE SOFTWARE IS PROVIDED ‘AS IS’, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-[rb]: http://www.ruby-lang.org/
-[gm]: http://rubygems.org/
-[jk]: https://github.com/mojombo/jekyll
-[rd]: https://github.com/rtomayko/rdiscount/
-[dp]: http://recursive-design.com
-[gr]: http://gruntjs.com
-[no]: http://nodejs.com
-
-[ty]: http://typicons.com/
-[fo]: http://fontello.com/
+#### If you want to be awesome.
+- Proudly display the 'Powered by Octopress' credit in the footer.
+- Add your site to the Wiki so we can watch the community grow.
