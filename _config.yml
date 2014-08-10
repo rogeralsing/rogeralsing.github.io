@@ -1,40 +1,54 @@
-# Name of your blog (this will show up at the top of your page and in the RSS feed)
-name: Sample Jekyll Blog
+# ----------------------- #
+#      Main Configs       #
+# ----------------------- #
 
-# Short description (goes below the title; it will also be used in the RSS feed)
-description: This is a sample Jekyll Blog.
+url: http://akkadotnet.github.com
+title: Akka.NET
+author: Akka.NET
 
-# Your name, as you want it to appear underneath each post and in the footer
-author: Your Name
+# Default date format is "ordinal" (resulting in "July 22nd 2007")
+# You can customize the format as defined in
+# http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
+# Additionally, %o will give you the ordinal representation of the day
+date_format: "ordinal"
 
-# Your email if you want it to be linked on the contact page
-author_email: you@example.com
+# RSS / Email (optional) subscription links (change if using something like Feedburner)
+subscribe_rss: /atom.xml
+subscribe_email:
+# RSS feeds can list your email address if you like
+email: akkadotnet@gmail.com
 
-# The directory for category index pages. Change it to something else if
-# for example you want links like /categories/category1 instead of /category1
-category_dir: /
+# ----------------------- #
+#    Jekyll & Plugins     #
+# ----------------------- #
 
-# Uncomment if you are planning to run the blog in a subdirectory
-# Note - if you enable this, and attempt to view your site locally you have to use the baseurl in your local path.
-# Example, you must use http://localhost:4000/path/to/blog
-#baseurl: /path/to/blog 
-baseurl: 
+# If publishing to a subdirectory as in http://site.com/project set 'root: /project'
+root: /
+permalink: /blog/:year/:month/:day/:title/
+#source: source
+#destination: public
+#plugins: plugins
+#code_dir: downloads/code
+category_dir: /blog/categories
 
-# The URL of your actual domain. This will be used to make absolute links in the RSS feed.
-url: http://yourdomain.com/
+markdown: redcarpet
 
-#### Under the Hood Stuff #####
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript","tables", "with_toc_data"]
 
-# Use rdiscount as the markdown engine because it generates html5 compliant code for stuff like footnotes
-# If you use maroku (default engine) some of your generated pages may not validate or lint as html5
-# If you don't have it install it via gem install rdiscount
-markdown: rdiscount
+#markdown: kramdown
 
-# Makes pretty (descriptive) permalinks. See Jekyll docs for alternatives.
-permalink: pretty
+kramdown: 
+  input: GFM 
+  use_coderay: true
+  coderay:
+    coderay_line_numbers: true
+    coderay_css: class
 
-# How many articles do you wish to appear on the front page:
-paginate: 3
+highlighter: pygments # default python pygments have been replaced by pygments.rb
 
-# Exclude metadata and development time dependencies (like Grunt plugins)
-exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]
+paginate: 10          # Posts per page on the blog index
+paginate_path: "posts/:num"  # Directory base for pagination URLs eg. /posts/2/
+recent_posts: 5       # Posts in the sidebar Recent Posts section
+excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
+excerpt_separator: "<!--more-->"
