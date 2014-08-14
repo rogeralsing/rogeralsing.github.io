@@ -164,12 +164,81 @@
 
 			</div>
 
-			<pre><code class="hljs lang-csharp"><span class="hljs-reserved">var</span> scope = <span class="hljs-keyword">new</span> RemoteScope(<span class="hljs-keyword">new</span> Address(<span class="hljs-string">"akka.tcp"</span>, <span class="hljs-string">"remote-system"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">8080</span>));
+						<!-- PAGE TOP -->
+			<section class="page-title">
+				<div class="container">
+
+					<header>
+
+						<ul class="breadcrumb"><!-- breadcrumb -->
+							<li><a href="/">Home</a></li>
+							<li><a href="/wiki/">Wiki</a></li>
+							<li class="active"> Remote deploy  <a href="https://github.com/akkadotnet/akka.net/wiki/Remote deploy/_edit"> (edit)</a></li>							
+						</ul><!-- /breadcrumb -->
+
+						<h2><!-- Page Title -->
+							<strong>Akka.NET</strong> Wiki
+						</h2><!-- /Page Title -->
+
+					</header>
+
+				</div>			
+			</section>
+			<!-- /PAGE TOP -->
+
+			<!-- CONTENT -->
+			<section>
+				<div class="container">
+
+					<div class="row">
+
+						<!-- RIGHT COLUMNS -->
+						<div class="col-md-3" id="toc">	
+						</div>
+						<!-- /RIGHT COLUMNS -->
+
+						<!-- LEFT COLUMNS -->
+						<div class="col-md-9">
+							<div id="main_content">
+
+								<pre><code class="hljs lang-csharp"><span class="hljs-reserved">var</span> scope = <span class="hljs-keyword">new</span> RemoteScope(<span class="hljs-keyword">new</span> Address(<span class="hljs-string">"akka.tcp"</span>, <span class="hljs-string">"remote-system"</span>, <span class="hljs-string">"localhost"</span>, <span class="hljs-number">8080</span>));
 <span class="hljs-reserved">var</span> deploy = <span class="hljs-keyword">new</span> Deploy(scope);
 <span class="hljs-reserved">var</span> remote = system.ActorOf<span class="hljs-function"><span class="hljs-params">(Props.Create(() =&gt; <span class="hljs-keyword">new</span> SomeActor(<span class="hljs-string">"some arg"</span>, <span class="hljs-number">123</span>))
      .WithDeploy(deploy) , <span class="hljs-string">"remoteactor"</span>)</span>;</span>
 </code></pre>
 
+
+								<div class="sky-form boxed">
+									<header>Leave a comment</header>
+									<div style="padding:12px;">
+									<div id="disqus_thread"></div>
+					                <script type="text/javascript">
+					                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+					                    var disqus_shortname = 'akkanet'; // required: replace example with your forum shortname
+
+					                    /* * * DON'T EDIT BELOW THIS LINE * * */
+					                    (function () {
+					                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					                        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+					                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+					                    })();
+					                </script>
+					                <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+					                <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+						            </div>
+						        </div>
+							</div>
+
+						</div>
+						<!-- /LEFT COLUMNS -->
+
+
+
+					</div>
+
+				</div>
+			</section>
+			<!-- /CONTENT -->
 
 
 			<!-- FOOTER -->
