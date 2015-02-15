@@ -4,14 +4,14 @@
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title> The Obligatory Hello World |  Akka.NET</title>
+		<title>The Obligatory Hello World | Akka.NET</title>
 		<meta name="keywords" content="Actor,Finite state machine, concurrency" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
@@ -46,10 +46,11 @@
 		<link href="/assets/css/header-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-		<link href="/content/style.css" rel="stylesheet" type="text/css" />
+		
 		
 		<!-- Highlighting -->
-		<link href="https://highlightjs.org/static/styles/monokai_sublime.css" rel="stylesheet" type="text/css" />
+		<link href="https://highlightjs.org/static/styles/github.css" rel="stylesheet" type="text/css" />
+		<link href="/content/style.css" rel="stylesheet" type="text/css" />
 	
 		<!-- Morenizr -->
 		<script type="text/javascript" src="/assets/plugins/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 		Background Image - add to body: 
 			data-background="/assets/images/boxed_background/1.jpg"
 	-->
-	<body class="smoothscroll">
+	<body>
 
 		<div id="wrapper">
 
@@ -94,7 +95,7 @@
 
 						<!-- Logo -->
 						<a class="logo" href="/">
-							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:10px;" />
+							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
 						</a>
 
 					</div><!-- /.container -->
@@ -132,22 +133,21 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-								
-								<!-- pageurl wiki/The Obligatory Hello World -->
+								<!-- pageurl  -->
 								<ul id="topMain" class="nav nav-pills nav-main">
-									<li class="mega-menu">
+									<li class="mega-menu{% if page.layout == "master" %} active{% endif %}">
 										<a href="/">
 											HOME <span>welcome</span>
 										</a>
 									</li>
-									<li class="mega-menu">										
+									<li class="mega-menu{% if page.layout == 'wiki' %} active{% endif %}">										
 										<a href="/wiki/">DOCUMENTATION <span>Wiki</span></a>
 									</li>
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net">CODE <span>Github repository</span></a>
 									</li>
 									<li class="mega-menu">
-										<a href="https://groups.google.com/forum/?hl=sv#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
+										<a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
 									</li>	
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net/issues">TRACKER <span>Issues and Features</span></a>
@@ -164,7 +164,8 @@
 
 			</div>
 
-						<!-- PAGE TOP -->
+			
+			<!-- PAGE TOP -->
 			<section class="page-title">
 				<div class="container">
 
@@ -173,7 +174,7 @@
 						<ul class="breadcrumb"><!-- breadcrumb -->
 							<li><a href="/">Home</a></li>
 							<li><a href="/wiki/">Wiki</a></li>
-							<li class="active"> The Obligatory Hello World  <a href="https://github.com/akkadotnet/akka.net/wiki/The Obligatory Hello World/_edit"> (edit)</a></li>							
+							<li class="active">{% if page.title %} The Obligatory Hello World {% endif %} <a href="https://github.com/akkadotnet/akka.net/edit/dev/documentation/wiki/The Obligatory Hello World.md" > (edit)</a></li>							
 						</ul><!-- /breadcrumb -->
 
 						<h2><!-- Page Title -->
@@ -201,13 +202,15 @@
 						<div class="col-md-9">
 							<div id="main_content">
 
-								<h2 id="hello-world-using-the-c-api">Hello World using the C# API</h2>
+								<div class="mybold"><h1 id="the-obligatory-hello-world">The Obligatory Hello World</h1>
+<p>This example shows how to define and consume actors in both C# and F#</p>
+<h2 id="hello-world-using-the-c-api">Hello World using the C# API</h2>
 <h4 id="define-a-message-">Define a message:</h4>
 <pre><code class="hljs lang-csharp"><span class="hljs-comment">//Create an (immutable) message type that your actor will respond to</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Greet
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Greet</span>
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span>(<span class="hljs-keyword">string</span> who)
-    {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span><span class="hljs-params">(<span class="hljs-keyword">string</span> who)</span>
+    </span>{
         Who = who;
     }
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Who { <span class="hljs-keyword">get</span>;<span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
@@ -215,19 +218,19 @@
 </code></pre>
 <h4 id="define-your-actor-using-the-receiveactor-api">Define your actor using the <code>ReceiveActor</code> API</h4>
 <pre><code class="hljs lang-csharp"><span class="hljs-comment">//Create the actor class</span>
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> GreetingActor : ReceiveActor
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GreetingActor</span> : <span class="hljs-title">ReceiveActor</span>
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span>()
-    {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span><span class="hljs-params">()</span>
+    </span>{
         Receive&lt;Greet&gt;(greet =&gt; Console.WriteLine(<span class="hljs-string">"Hello {0}"</span>, greet.Who));
     }
 }
 </code></pre>
 <h4 id="-or-using-the-typedactor-api">..or using the <code>TypedActor</code> API</h4>
-<pre><code class="hljs lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> GreetingActor : TypedActor , IHandle&lt;Greet&gt;
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GreetingActor</span> : <span class="hljs-title">TypedActor</span> , <span class="hljs-title">IHandle</span>&lt;<span class="hljs-title">Greet</span>&gt;
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Handle</span>(Greet greet)
-    {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Handle</span><span class="hljs-params">(Greet greet)</span>
+    </span>{
         Console.WriteLine(<span class="hljs-string">"Hello {0}!"</span>, greet.Who);
     }
 }
@@ -242,25 +245,30 @@
 <span class="hljs-comment">//send a message to the actor</span>
 greeter.Tell(<span class="hljs-keyword">new</span> Greet(<span class="hljs-string">"World"</span>));
 </code></pre>
+<p>See also:</p>
+<ul>
+<li>[[Untyped actors]].</li>
+<li>[[Typed actors]].</li>
+</ul>
 <h2 id="hello-world-using-the-f-api">Hello World using the F# API</h2>
 <pre><code class="hljs lang-fsharp"><span class="hljs-comment">// Create an (immutable) message type that your actor will respond to</span>
-<span class="hljs-keyword">type</span> Greet <span class="hljs-subst">=</span> Greet of <span class="hljs-built_in">string</span>
+<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Greet</span> </span>= Greet <span class="hljs-keyword">of</span> string
 
-<span class="hljs-keyword">let</span> system <span class="hljs-subst">=</span> ActorSystem<span class="hljs-built_in">.</span>Create <span class="hljs-string">"MySystem"</span>
+<span class="hljs-keyword">let</span> system = ActorSystem.Create <span class="hljs-string">"MySystem"</span>
 
 <span class="hljs-comment">// Use F# computation expression with tail-recursive loop </span>
 <span class="hljs-comment">// to create an actor message handler and return a reference </span>
-<span class="hljs-keyword">let</span> greeter <span class="hljs-subst">=</span> spawn system <span class="hljs-string">"greeter"</span> <span class="hljs-subst">&lt;|</span> fun mailbox <span class="hljs-subst">-&gt;
-    </span><span class="hljs-keyword">let</span> rec <span class="hljs-keyword">loop</span>() <span class="hljs-subst">=</span> actor {
-        <span class="hljs-keyword">let</span><span class="hljs-subst">!</span> msg <span class="hljs-subst">=</span> mailbox<span class="hljs-built_in">.</span>Receive()
+<span class="hljs-keyword">let</span> greeter = spawn system <span class="hljs-string">"greeter"</span> &lt;| <span class="hljs-keyword">fun</span> mailbox -&gt;
+    <span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> loop() = actor {
+        <span class="hljs-keyword">let</span>! msg = mailbox.Receive()
         <span class="hljs-keyword">match</span> msg <span class="hljs-keyword">with</span>
-        <span class="hljs-subst">|</span> Greet who <span class="hljs-subst">-&gt; </span>printf <span class="hljs-string">"Hello, %s!\n"</span> who
-        <span class="hljs-keyword">return</span><span class="hljs-subst">!</span> <span class="hljs-keyword">loop</span>() }
-    <span class="hljs-keyword">loop</span>()
+        | Greet who -&gt; printf <span class="hljs-string">"Hello, %s!\n"</span> who
+        <span class="hljs-keyword">return</span>! loop() }
+    loop()
 
-greeter <span class="hljs-subst">&lt;!</span> Greet <span class="hljs-string">"World"</span>
+greeter &lt;! Greet <span class="hljs-string">"World"</span>
 </code></pre>
-
+</div> 
 
 								<div class="sky-form boxed">
 									<header>Leave a comment</header>
@@ -293,6 +301,7 @@ greeter <span class="hljs-subst">&lt;!</span> Greet <span class="hljs-string">"W
 				</div>
 			</section>
 			<!-- /CONTENT -->
+
 
 
 			<!-- FOOTER -->
@@ -407,6 +416,5 @@ greeter <span class="hljs-subst">&lt;!</span> Greet <span class="hljs-string">"W
 
 		<script type="text/javascript" src="/assets/js/scripts.js"></script>
 		<script type="text/javascript" src="/content/scripts.js"></script>
-		<a href="http://www.reactivemanifesto.org/"> <img style="border: 0px currentColor; left: 0px; top: 0px; position: fixed; z-index: 9000;" src="http://www.reactivemanifesto.org/images/ribbons/we-are-reactive-red-left.png"> </a>
 	</body>
 </html>

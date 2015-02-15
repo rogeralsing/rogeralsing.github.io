@@ -4,14 +4,14 @@
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title> Getting started |  Akka.NET</title>
+		<title>Getting started | Akka.NET</title>
 		<meta name="keywords" content="Actor,Finite state machine, concurrency" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
@@ -46,10 +46,11 @@
 		<link href="/assets/css/header-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-		<link href="/content/style.css" rel="stylesheet" type="text/css" />
+		
 		
 		<!-- Highlighting -->
-		<link href="https://highlightjs.org/static/styles/monokai_sublime.css" rel="stylesheet" type="text/css" />
+		<link href="https://highlightjs.org/static/styles/github.css" rel="stylesheet" type="text/css" />
+		<link href="/content/style.css" rel="stylesheet" type="text/css" />
 	
 		<!-- Morenizr -->
 		<script type="text/javascript" src="/assets/plugins/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 		Background Image - add to body: 
 			data-background="/assets/images/boxed_background/1.jpg"
 	-->
-	<body class="smoothscroll">
+	<body>
 
 		<div id="wrapper">
 
@@ -94,7 +95,7 @@
 
 						<!-- Logo -->
 						<a class="logo" href="/">
-							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:10px;" />
+							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
 						</a>
 
 					</div><!-- /.container -->
@@ -132,22 +133,21 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-								
-								<!-- pageurl wiki/Getting started -->
+								<!-- pageurl  -->
 								<ul id="topMain" class="nav nav-pills nav-main">
-									<li class="mega-menu">
+									<li class="mega-menu{% if page.layout == "master" %} active{% endif %}">
 										<a href="/">
 											HOME <span>welcome</span>
 										</a>
 									</li>
-									<li class="mega-menu">										
+									<li class="mega-menu{% if page.layout == 'wiki' %} active{% endif %}">										
 										<a href="/wiki/">DOCUMENTATION <span>Wiki</span></a>
 									</li>
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net">CODE <span>Github repository</span></a>
 									</li>
 									<li class="mega-menu">
-										<a href="https://groups.google.com/forum/?hl=sv#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
+										<a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
 									</li>	
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net/issues">TRACKER <span>Issues and Features</span></a>
@@ -164,7 +164,8 @@
 
 			</div>
 
-						<!-- PAGE TOP -->
+			
+			<!-- PAGE TOP -->
 			<section class="page-title">
 				<div class="container">
 
@@ -173,7 +174,7 @@
 						<ul class="breadcrumb"><!-- breadcrumb -->
 							<li><a href="/">Home</a></li>
 							<li><a href="/wiki/">Wiki</a></li>
-							<li class="active"> Getting started  <a href="https://github.com/akkadotnet/akka.net/wiki/Getting started/_edit"> (edit)</a></li>							
+							<li class="active">{% if page.title %} Getting started {% endif %} <a href="https://github.com/akkadotnet/akka.net/edit/dev/documentation/wiki/Getting started.md" > (edit)</a></li>							
 						</ul><!-- /breadcrumb -->
 
 						<h2><!-- Page Title -->
@@ -201,14 +202,15 @@
 						<div class="col-md-9">
 							<div id="main_content">
 
-								<h1 id="getting-started-with-akka-net">Getting started with Akka.NET</h1>
+								<div class="mybold"><h1 id="getting-started-with-akka-net">Getting started with Akka.NET</h1>
 <p>This tutorial is intended to give an introduction to using Akka.NET by creating a simple greeter actor using C#.</p>
 <h2 id="set-up-your-project">Set up your project</h2>
 <p>Start visual studio and create a new C# Console Application.
 Once we have our console application, we need to open up the Package Manager Console and type:</p>
-<pre><code><span class="hljs-input"><span class="hljs-prompt">PM&gt;</span> <span class="hljs-constant">Install</span>-<span class="hljs-constant">Package</span> <span class="hljs-constant">Akka</span></span>
-</code></pre><p>Then we need to add the relevant using statements:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">using</span> System;
+<pre><code class="hljs lang-PM">PM&gt; <span class="hljs-keyword">Install</span>-Package Akka
+</code></pre>
+<p>Then we need to add the relevant using statements:</p>
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Collections.Generic;
 <span class="hljs-keyword">using</span> System.Linq;
 <span class="hljs-keyword">using</span> System.Text;
@@ -218,12 +220,12 @@ Once we have our console application, we need to open up the Package Manager Con
 <span class="hljs-keyword">using</span> Akka;
 <span class="hljs-keyword">using</span> Akka.Actor;
 
-<span class="hljs-class"><span class="hljs-keyword">namespace</span> <span class="hljs-title">ConsoleApplication11</span>
-</span>{
-    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
-    </span>{
-        <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> Main(<span class="hljs-keyword">string</span>[] args)
-        {
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">ConsoleApplication11</span>
+{
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+    {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span><span class="hljs-params">(<span class="hljs-keyword">string</span>[] args)</span>
+        </span>{
         }
     }
 }
@@ -239,22 +241,22 @@ Once we have our console application, we need to open up the Package Manager Con
 <span class="hljs-keyword">using</span> Akka;
 <span class="hljs-keyword">using</span> Akka.Actor;
 
-namespace ConsoleApplication11
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">ConsoleApplication11</span>
 {
     <span class="hljs-comment">//Create an (immutable) message type that your actor will respond to</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Greet
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Greet</span>
     {
-        <span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span>(<span class="hljs-keyword">string</span> who)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span><span class="hljs-params">(<span class="hljs-keyword">string</span> who)</span>
+        </span>{
             Who = who;
         }
         <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Who { <span class="hljs-keyword">get</span>;<span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     }
 
-    class Program
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
     {
-        <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> Main(<span class="hljs-keyword">string</span>[] args)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span><span class="hljs-params">(<span class="hljs-keyword">string</span>[] args)</span>
+        </span>{
         }
     }
 }
@@ -269,22 +271,22 @@ namespace ConsoleApplication11
 <span class="hljs-keyword">using</span> Akka;
 <span class="hljs-keyword">using</span> Akka.Actor;
 
-namespace ConsoleApplication11
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">ConsoleApplication11</span>
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Greet
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Greet</span>
     {
-        <span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span>(<span class="hljs-keyword">string</span> who)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span><span class="hljs-params">(<span class="hljs-keyword">string</span> who)</span>
+        </span>{
             Who = who;
         }
         <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Who { <span class="hljs-keyword">get</span>;<span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     }
 
     <span class="hljs-comment">// Create the actor class</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> GreetingActor : ReceiveActor
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GreetingActor</span> : <span class="hljs-title">ReceiveActor</span>
     {
-        <span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span>()
-        {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span><span class="hljs-params">()</span>
+        </span>{
             <span class="hljs-comment">// Tell the actor to respond </span>
             <span class="hljs-comment">// to the Greet message</span>
             Receive&lt;Greet&gt;(greet =&gt; 
@@ -292,15 +294,16 @@ namespace ConsoleApplication11
         }
     }
 
-    class Program
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
     {
-        <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> Main(<span class="hljs-keyword">string</span>[] args)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span><span class="hljs-params">(<span class="hljs-keyword">string</span>[] args)</span>
+        </span>{
         }
     }
+}
 </code></pre>
 <p>Now it&#39;s time to consume our actor, we do so by creating an <code>ActorSystem</code> and calling <code>ActorOf</code></p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">using</span> System;
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Collections.Generic;
 <span class="hljs-keyword">using</span> System.Linq;
 <span class="hljs-keyword">using</span> System.Text;
@@ -309,30 +312,30 @@ namespace ConsoleApplication11
 <span class="hljs-keyword">using</span> Akka;
 <span class="hljs-keyword">using</span> Akka.Actor;
 
-namespace ConsoleApplication11
+<span class="hljs-keyword">namespace</span> <span class="hljs-title">ConsoleApplication11</span>
 {
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Greet
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Greet</span>
     {
-        <span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span>(<span class="hljs-keyword">string</span> who)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Greet</span><span class="hljs-params">(<span class="hljs-keyword">string</span> who)</span>
+        </span>{
             Who = who;
         }
         <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Who { <span class="hljs-keyword">get</span>;<span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
     }
 
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> GreetingActor : ReceiveActor
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">GreetingActor</span> : <span class="hljs-title">ReceiveActor</span>
     {
-        <span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span>()
-        {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">GreetingActor</span><span class="hljs-params">()</span>
+        </span>{
             Receive&lt;Greet&gt;(greet =&gt; 
                Console.WriteLine(<span class="hljs-string">"Hello {0}"</span>, greet.Who));
         }
     }
 
-    class Program
+    <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
     {
-        <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> Main(<span class="hljs-keyword">string</span>[] args)
-        {
+        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span><span class="hljs-params">(<span class="hljs-keyword">string</span>[] args)</span>
+        </span>{
             <span class="hljs-comment">//create a new actor system (a container for your actors)</span>
             <span class="hljs-keyword">var</span> system = ActorSystem.Create(<span class="hljs-string">"MySystem"</span>);
             <span class="hljs-comment">//create your actor and get a reference to it.</span>
@@ -342,12 +345,16 @@ namespace ConsoleApplication11
             <span class="hljs-keyword">var</span> greeter = system.ActorOf&lt;GreetingActor&gt;(<span class="hljs-string">"greeter"</span>);
             <span class="hljs-comment">//send a message to the actor</span>
             greeter.Tell(<span class="hljs-keyword">new</span> Greet(<span class="hljs-string">"World"</span>));
+
+            <span class="hljs-comment">//this prevents the app from exiting</span>
+            <span class="hljs-comment">//Before the async work is done</span>
+            Console.ReadLine();
         }
     }
 }
 </code></pre>
 <p>That is it, your actor is now ready to consume messages sent from any number of calling threads.</p>
-
+</div> 
 
 								<div class="sky-form boxed">
 									<header>Leave a comment</header>
@@ -380,6 +387,7 @@ namespace ConsoleApplication11
 				</div>
 			</section>
 			<!-- /CONTENT -->
+
 
 
 			<!-- FOOTER -->
@@ -494,6 +502,5 @@ namespace ConsoleApplication11
 
 		<script type="text/javascript" src="/assets/js/scripts.js"></script>
 		<script type="text/javascript" src="/content/scripts.js"></script>
-		<a href="http://www.reactivemanifesto.org/"> <img style="border: 0px currentColor; left: 0px; top: 0px; position: fixed; z-index: 9000;" src="http://www.reactivemanifesto.org/images/ribbons/we-are-reactive-red-left.png"> </a>
 	</body>
 </html>

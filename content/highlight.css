@@ -1,20 +1,142 @@
 /*
 
+Akka.NET style. by akkadotnet.github.com
+
+*/
+
+/*
+.hljs {
+  padding: 15px;
+  border-radius: 5px;
+  display: block;
+  overflow-x: auto;
+  background: #2b2b2b;
+  text-shadow: 1px 1px #101010;;
+  color: #ffffff;
+}
+
+.hljs-tag,
+.css .hljs-rules,
+.css .hljs-value,
+.css .hljs-function
+.hljs-preprocessor,
+.hljs-pragma {
+  color: #5ea8ec;
+}
+
+.hljs-strongemphasis,
+.hljs-strong,
+.hljs-emphasis {
+  color: #6eb8fc;
+}
+
+.hljs-bullet,
+.hljs-blockquote,
+.hljs-horizontal_rule,
+.hljs-number,
+.hljs-regexp,
+.alias .hljs-keyword,
+.hljs-literal,
+.hljs-hexcolor {
+  color: #fff0a0;
+}
+
+.hljs-title {
+  color: #fff0a0; 
+}
+
+.hljs-tag .hljs-title {
+  color: #7ec8ff;
+}
+
+.hljs-cdata {
+  color: #f0f0f0;
+}
+.hljs-attribute {
+  color: #fff0a0;
+}
+.hljs-pi {
+  color: #808080;
+}
+
+.hljs-value {
+  color: #ffffff;
+}
+
+
+
+.hljs-link_url {
+  font-size: 80%;
+}
+
+.hljs-strong,
+.hljs-strongemphasis {
+  font-weight: bold;
+}
+
+.hljs-emphasis,
+.hljs-strongemphasis {
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-function,
+.hljs-change,
+.hljs-winutils,
+.hljs-flow,
+.lisp .hljs-title,
+.clojure .hljs-built_in,
+.nginx .hljs-title,
+.tex .hljs-special,
+.hljs-header,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.alias .hljs-keyword:first-child,
+.css .hljs-tag,
+.css .unit,
+.css .hljs-important {
+  color: #6eb8fc;
+}
+
+.hljs-function .hljs-keyword,
+.hljs-class .hljs-keyword:first-child,
+.hljs-constant,
+.css .hljs-attribute {
+  color: #6eb8fc;
+}
+
+.hljs-variable,
+.hljs-params {
+  color: #ffffff;
+}
+
+.hljs-string {
+  color: #d4b43c;
+  padding: 2px;
+}
+
+.hljs-comment {
+  color: #96C71D;
+}
+*/
+
+/*
+
 github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
 .hljs {
+    padding: 15px;
+  border-radius: 5px;
   display: block;
   overflow-x: auto;
-  padding: 0.5em;
-  color: #333;
-  background: #f8f8f8;
-  -webkit-text-size-adjust: none;
+  background: #2b2b2b;
+  text-shadow: 1px 1px #101010;;
+  color: #ffffff;
 }
 
 .hljs-comment,
-.hljs-template_comment,
 .diff .hljs-header,
 .hljs-javadoc {
   color: #998;
@@ -24,7 +146,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-keyword,
 .css .rule .hljs-keyword,
 .hljs-winutils,
-.javascript .hljs-title,
 .nginx .hljs-title,
 .hljs-subst,
 .hljs-request,
@@ -54,9 +175,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   font-weight: bold;
 }
 
-.javascript .hljs-title,
-.lisp .hljs-title,
-.clojure .hljs-title,
+.hljs-list .hljs-keyword,
 .hljs-subst {
   font-weight: normal;
 }
@@ -90,14 +209,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-symbol,
 .ruby .hljs-symbol .hljs-string,
 .lisp .hljs-keyword,
+.clojure .hljs-keyword,
+.scheme .hljs-keyword,
 .tex .hljs-special,
 .hljs-prompt {
   color: #990073;
 }
 
-.hljs-built_in,
-.lisp .hljs-title,
-.clojure .hljs-built_in {
+.hljs-built_in {
   color: #0086b3;
 }
 

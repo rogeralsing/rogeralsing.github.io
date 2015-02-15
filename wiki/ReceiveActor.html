@@ -4,14 +4,14 @@
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title> ReceiveActor |  Akka.NET</title>
+		<title>ReceiveActor | Akka.NET</title>
 		<meta name="keywords" content="Actor,Finite state machine, concurrency" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
@@ -46,10 +46,11 @@
 		<link href="/assets/css/header-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-		<link href="/content/style.css" rel="stylesheet" type="text/css" />
+		
 		
 		<!-- Highlighting -->
-		<link href="https://highlightjs.org/static/styles/monokai_sublime.css" rel="stylesheet" type="text/css" />
+		<link href="https://highlightjs.org/static/styles/github.css" rel="stylesheet" type="text/css" />
+		<link href="/content/style.css" rel="stylesheet" type="text/css" />
 	
 		<!-- Morenizr -->
 		<script type="text/javascript" src="/assets/plugins/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 		Background Image - add to body: 
 			data-background="/assets/images/boxed_background/1.jpg"
 	-->
-	<body class="smoothscroll">
+	<body>
 
 		<div id="wrapper">
 
@@ -94,7 +95,7 @@
 
 						<!-- Logo -->
 						<a class="logo" href="/">
-							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:10px;" />
+							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
 						</a>
 
 					</div><!-- /.container -->
@@ -132,22 +133,21 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-								
-								<!-- pageurl wiki/ReceiveActor -->
+								<!-- pageurl  -->
 								<ul id="topMain" class="nav nav-pills nav-main">
-									<li class="mega-menu">
+									<li class="mega-menu{% if page.layout == "master" %} active{% endif %}">
 										<a href="/">
 											HOME <span>welcome</span>
 										</a>
 									</li>
-									<li class="mega-menu">										
+									<li class="mega-menu{% if page.layout == 'wiki' %} active{% endif %}">										
 										<a href="/wiki/">DOCUMENTATION <span>Wiki</span></a>
 									</li>
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net">CODE <span>Github repository</span></a>
 									</li>
 									<li class="mega-menu">
-										<a href="https://groups.google.com/forum/?hl=sv#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
+										<a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
 									</li>	
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net/issues">TRACKER <span>Issues and Features</span></a>
@@ -164,7 +164,8 @@
 
 			</div>
 
-						<!-- PAGE TOP -->
+			
+			<!-- PAGE TOP -->
 			<section class="page-title">
 				<div class="container">
 
@@ -173,7 +174,7 @@
 						<ul class="breadcrumb"><!-- breadcrumb -->
 							<li><a href="/">Home</a></li>
 							<li><a href="/wiki/">Wiki</a></li>
-							<li class="active"> ReceiveActor  <a href="https://github.com/akkadotnet/akka.net/wiki/ReceiveActor/_edit"> (edit)</a></li>							
+							<li class="active">{% if page.title %} ReceiveActor {% endif %} <a href="https://github.com/akkadotnet/akka.net/edit/dev/documentation/wiki/ReceiveActor.md" > (edit)</a></li>							
 						</ul><!-- /breadcrumb -->
 
 						<h2><!-- Page Title -->
@@ -201,55 +202,51 @@
 						<div class="col-md-9">
 							<div id="main_content">
 
-								<h2 id="using-receive">Using Receive</h2>
-<h3 id="inherit-from-receiveactor">Inherit from ReceiveActor</h3>
-<p>In order to use the <code>Receive()</code> method inside an actor the actor must inherit from <code>ReceiveActor</code>.</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> MyActor : ReceiveActor
+								<div class="mybold"><h1 id="using-receive">Using Receive</h1>
+<h2 id="inherit-from-receiveactor">Inherit from ReceiveActor</h2>
+<p>In order to use the <code>Receive()</code> method inside an actor the actor must inherit from <code>ReceiveActor</code>.
+Inside the constructor, add a call to <code>Receive&lt;T&gt;(Action&lt;T&gt; handler)</code> for every type of message you want to handle:</p>
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyActor</span> : <span class="hljs-title">ReceiveActor</span>
 {
-}
-</code></pre>
-<p>Inside the constructor, add a call to <code>Receive&lt;T&gt;(Action&lt;T&gt; handler)</code> for every type of message you want to handle:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">private</span> <span class="hljs-keyword">class</span> MyActor : ReceiveActor
-{
-  <span class="hljs-keyword">public</span> <span class="hljs-title">MyActor</span>()
-  {
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyActor</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s)); <span class="hljs-comment">//1</span>
     Receive&lt;<span class="hljs-keyword">int</span>&gt;(i =&gt; Console.WriteLine(<span class="hljs-string">"Received integer: "</span> + i));   <span class="hljs-comment">//2</span>
   }
 }
 </code></pre>
 <p>Whenever a message of typ <code>string</code> is sent to <strong>MyActor</strong> the first handler is invoked and for messages of type <code>int</code> the second handler is used.</p>
-<h3 id="handler-priority">Handler priority</h3>
+<h2 id="handler-priority">Handler priority</h2>
 <p>If more than one handler matches, the one that appears first is used, and the others are not called.</p>
-<pre><code class="hljs lang-c#">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + )s);      <span class="hljs-comment">//1</span>
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s));      <span class="hljs-comment">//1</span>
 Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Also received string: "</span> + s)); <span class="hljs-comment">//2</span>
 Receive&lt;<span class="hljs-keyword">object</span>&gt;(o =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o));      <span class="hljs-comment">//3</span>
 </code></pre>
 <p><strong>Example</strong>: The actor receives a message of type <code>string</code>. Only the first handler is invoked, even though all three handlers can handle that message.</p>
-<h3 id="using-predicates">Using predicates</h3>
+<h2 id="using-predicates">Using predicates</h2>
 <p>By specifying a predicate, you can choose which messages to handle.</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);
 </code></pre>
-<p>The handler above will only be invoked if the length of the string is greater than 20.</p>
+<p>The handler above will only be invoked if the length of the string is greater than 5.</p>
 <p>If the predicate do not match, the next matching handler will be used.</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"1: "</span> + s));    <span class="hljs-comment">//1</span>
-Receive&lt;string&gt;(s =&gt; s.Length&gt;<span class="hljs-number">2</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"2: "</span> + s));    <span class="hljs-comment">//2</span>
-Receive&lt;string&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"3: "</span> + s));                     <span class="hljs-comment">//3</span>
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"1: "</span> + s));    <span class="hljs-comment">//1</span>
+Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s.Length&gt;<span class="hljs-number">2</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"2: "</span> + s));    <span class="hljs-comment">//2</span>
+Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"3: "</span> + s));                     <span class="hljs-comment">//3</span>
 </code></pre>
 <p><strong>Example</strong>: The actor receives the message &quot;123456&quot;. Since the length of is 6, the predicate specified for the first handler will return true, and the first handler will be invoked resulting in &quot;1: 123456&quot; being written to the console.</p>
-<div class="alert alert-success">
-<p><strong>Note</strong><br/> that even though the predicate for the second handler matches, and that the third handler matches all messages of type <code>string</code> only the first handler is invoked.</p>
+<div class="alert alert-default">
+<p><strong>Note</strong><br/> Note that even though the predicate for the second handler matches, and that the third handler matches all messages of type <code>string</code> only the first handler is invoked.</p>
 </div>
 <p><strong>Example</strong>: If the actor receives the message &quot;1234&quot;, then &quot;2: 1234&quot; will be written to the console.</p>
 <p><strong>Example</strong>: If the actor receives the message &quot;12&quot;, then &quot;3: 12&quot; will be written on the console.</p>
-<h4 id="predicates-position">Predicates position</h4>
+<h3 id="predicates-position">Predicates position</h3>
 <p>Predicates can be specified <em>before</em> the action handler or <em>after</em>. These two declarations are equivalent:</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s));
-Receive&lt;string&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s, s =&gt; s.Length&gt;<span class="hljs-number">5</span>));
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s.Length&gt;<span class="hljs-number">5</span>, s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s));
+Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s, s =&gt; s.Length&gt;<span class="hljs-number">5</span>));
 </code></pre>
-<h3 id="receive-using-funcs">Receive using Funcs</h3>
-<p>More complex handlers can be specified using the <code>Receive&lt;T&gt;(Func&lt;T,bool&gt; handler)</code> overload. These are invoked if the message is of the specified type. If the func returns <code>true</code>, the message is considered handled, and no more handlers will be invoked.</p>
-<pre><code class="hljs lang-c#">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; 
+<h2 id="receive-using-funcs">Receive using Funcs</h2>
+<p>More complex handlers can be specified using the <code>Receive&lt;T&gt;(Func&lt;T,bool&gt; handler)</code> overload. These are invoked if the message is of the specified type. The func handler should return <code>true</code> if the message was handled, and <code>false</code>otherwise. If the handler returns <code>true</code>no more handlers will be invoked.</p>
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; 
   { 
     <span class="hljs-keyword">if</span>(s.Length&gt;<span class="hljs-number">5</span>)
     {
@@ -262,39 +259,42 @@ Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLin
 </code></pre>
 <p><strong>Example</strong>: The actor receives the message &quot;123&quot;. Since it&#39;s a <code>string</code>, the first handler is invoked. The length is only 3 so the if clause will be false and <code>false</code> is returned. Since <code>false</code> was returned the next matching handler will be invoked, and &quot;2: 123&quot; will be written to the console.
 <strong>Example</strong>: The actor receives the message &quot;123456&quot;. Since it&#39;s a <code>string</code>, the first handler is invoked. The length is greater than 5 so the if body will be called, and &quot;1: 123456&quot; will be written to the console. The handler returns <code>true</code> and therefore no more handlers will be invoked.</p>
-<h3 id="unmatched-messages">Unmatched messages</h3>
+<div class="alert alert-default">
+<p><strong>Note</strong><br/>It&#39;s bad practice to return <code>true</code> when a message has not been handled and can lead to hard found bugs. It&#39;s better to let the <code>Unhandled()</code> publish the message to the <code>EventStream</code> as explained below.</p>
+</div>
+<h2 id="unmatched-messages">Unmatched messages</h2>
 <p>If the actor receives a message for which no handler matches, the unhandled message is published to the <code>EventStream</code> wrapped in an <code>UnhandledMessage</code>. To change this behavior override <code>Unhandled(object message)</code></p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Unhandled</span>(<span class="hljs-keyword">object</span> message)
-{
+<pre><code class="hljs lang-csharp"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Unhandled</span><span class="hljs-params">(<span class="hljs-keyword">object</span> message)</span>
+</span>{
   <span class="hljs-comment">//Do something with the message.</span>
 }
 </code></pre>
 <p>Another option is to add a handler last that matches all messages, using <code>ReceiveAny()</code>.</p>
-<h3 id="receiveany">ReceiveAny</h3>
+<h2 id="receiveany">ReceiveAny</h2>
 <p>To catch messages of any type the <code>ReceiveAny(Action&lt;object&gt; handler)</code> overload can be specified.</p>
-<pre><code class="hljs lang-c#"><span class="hljs-constant">Receive&lt;string&gt;(s</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);
-<span class="hljs-constant">ReceiveAny(o</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);
+ReceiveAny(o =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
 </code></pre>
 <p>Since it handles everything, it must be specified last. Specifying handlers it after will cause an exception.</p>
-<pre><code class="hljs lang-c#"><span class="hljs-constant">ReceiveAny(o</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
-<span class="hljs-constant">Receive&lt;string&gt;(s</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);  <span class="hljs-comment">//This will cause an exception</span>
+<pre><code class="hljs lang-csharp">ReceiveAny(o =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
+Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Console.WriteLine(<span class="hljs-string">"Received string: "</span> + s);  <span class="hljs-comment">//This will cause an exception</span>
 </code></pre>
-<div class="alert alert-success">
-<p><strong>Note</strong><br/> that <code>Receive&lt;object&gt;(Action&lt;object&gt; handler)</code> behaves the same as <code>ReceiveAny()</code> as it catches all messages. These two are equivalent:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-constant">ReceiveAny(o</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
-<span class="hljs-constant">Receive&lt;object&gt;(0</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
+<div class="alert alert-default">
+<p><strong>Note</strong><br/>Note that <code>Receive&lt;object&gt;(Action&lt;object&gt; handler)</code> behaves the same as <code>ReceiveAny()</code> as it catches all messages. These two are equivalent:</p>
+<pre><code class="hljs lang-csharp">ReceiveAny(o =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
+Receive&lt;<span class="hljs-keyword">object</span>&gt;(<span class="hljs-number">0</span> =&gt; Console.WriteLine(<span class="hljs-string">"Received object: "</span> + o);
 </code></pre>
 </div>
-<h3 id="non-generic-overloads">Non generic overloads</h3>
+<h2 id="non-generic-overloads">Non generic overloads</h2>
 <p><code>Receive</code> has non generic overloads:</p>
-<pre><code class="hljs lang-c#">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj =&gt; Console.WriteLine(obj.ToString()) );
+<pre><code class="hljs lang-csharp">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj =&gt; Console.WriteLine(obj.ToString()) );
 </code></pre>
 <p>Predicates can go before or after the handler:</p>
-<pre><code class="hljs lang-c#">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj=&gt; ((<span class="hljs-keyword">string</span>) obj).Length&gt;<span class="hljs-number">5</span>, obj =&gt; Console.WriteLine(obj.ToString()) );
+<pre><code class="hljs lang-csharp">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj=&gt; ((<span class="hljs-keyword">string</span>) obj).Length&gt;<span class="hljs-number">5</span>, obj =&gt; Console.WriteLine(obj.ToString()) );
 Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj =&gt; Console.WriteLine(obj.ToString()), obj=&gt; ((<span class="hljs-keyword">string</span>) obj).Length&gt;<span class="hljs-number">5</span> );
 </code></pre>
 <p>And the non generic Func</p>
-<pre><code class="hljs lang-c#">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj =&gt; 
+<pre><code class="hljs lang-csharp">Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">string</span>), obj =&gt; 
   { 
     <span class="hljs-keyword">var</span> s = (<span class="hljs-keyword">string</span>) obj;
     <span class="hljs-keyword">if</span>(s.Length&gt;<span class="hljs-number">5</span>)
@@ -305,138 +305,143 @@ Receive(<span class="hljs-keyword">typeof</span>(<span class="hljs-keyword">stri
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
   });
 </code></pre>
-<h3 id="become">Become</h3>
+<h2 id="become">Become</h2>
 <p>You can switch the handler at runtime using <code>Become()</code> which replaces the current handler with a new one.</p>
-<pre><code class="hljs lang-c#">public class MoodActor : ReceiveActor
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MoodActor</span> : <span class="hljs-title">ReceiveActor</span>
 {
-  public MoodActor()
-  {
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Mood?"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm neutral"</span>));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Happy"</span>, <span class="hljs-variable">_ =</span>&gt; Become(Happy));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Angry"</span>, <span class="hljs-variable">_ =</span>&gt; Become(Angry));
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MoodActor</span><span class="hljs-params">()</span>
+  </span>{
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm neutral"</span>));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Happy"</span>, _ =&gt; Become(Happy));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Angry"</span>, _ =&gt; Become(Angry));
   }
 
-  private void Happy()
-  {
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Mood?"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm happy"</span>));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Happy"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm already happy!"</span>, Self));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Angry"</span>, <span class="hljs-variable">_ =</span>&gt; Become(Angry));
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Happy</span><span class="hljs-params">()</span>
+  </span>{
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm happy"</span>));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Happy"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm already happy!"</span>, Self));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Angry"</span>, _ =&gt; Become(Angry));
   }
 
-  private void Angry()
-  {
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Mood?"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm angry"</span>));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Angry"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm already angry!"</span>, Self));
-    Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Happy"</span>, <span class="hljs-variable">_ =</span>&gt; Become(Happy));
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Angry</span><span class="hljs-params">()</span>
+  </span>{
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm angry"</span>));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Angry"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm already angry!"</span>, Self));
+    Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Happy"</span>, _ =&gt; Become(Happy));
   }
 }
 </code></pre>
 <p>Using MoodActor:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">var</span> moodActor = system.ActorOf&lt;MoodActor&gt;();
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: "I'm neutral"</span>
-moodActor.Tell(<span class="hljs-string">"Happy"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: becomes Happy</span>
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: "I'm happy"</span>
-moodActor.Tell(<span class="hljs-string">"Happy"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: "I'm already happy!"</span>
-moodActor.Tell(<span class="hljs-string">"Angry"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: becomes Angry</span>
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: "I'm Angry"</span>
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">var</span> moodActor = system.ActorOf&lt;MoodActor&gt;();
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);  <span class="hljs-comment">// Result: "I'm neutral"</span>
+moodActor.Tell(<span class="hljs-string">"Happy"</span>, Self);  <span class="hljs-comment">// Result: becomes Happy</span>
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);  <span class="hljs-comment">// Result: "I'm happy"</span>
+moodActor.Tell(<span class="hljs-string">"Happy"</span>, Self);  <span class="hljs-comment">// Result: "I'm already happy!"</span>
+moodActor.Tell(<span class="hljs-string">"Angry"</span>, Self);  <span class="hljs-comment">// Result: becomes Angry</span>
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);  <span class="hljs-comment">// Result: "I'm Angry"</span>
 </code></pre>
 <p>You may use lambdas if you don&#39;t want separate methods:</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;<span class="hljs-function"><span class="hljs-params">(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; Become(() =&gt;
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; Become(() =&gt;
 {
-  Receive&lt;string&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
-}))</span>;</span>
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
+}));
 </code></pre>
-<h3 id="become-unbecome">Become/Unbecome</h3>
-<p>In the examples above the receive handlers are replaced when <code>Become()</code> is called. The other way of using <code>Become</code> pushes the current handler on a stack making it possible to switch back to it using <code>Unbecome</code>:</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Grumpy"</span>, <span class="hljs-variable">_ =</span>&gt; Become(Grumpy, discardOld: <span class="hljs-constant">false</span>));
+<h2 id="become-unbecome">Become/Unbecome</h2>
+<p>In the examples above the receive handlers are replaced when <code>Become()</code> is called. By specifying <code>discardOld: false</code> when calling <code>Become</code> the current handler is pushed on a stack making it possible to switch back to it using <code>Unbecome</code>:</p>
+<pre><code class="hljs lang-csharp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MoodActor</span><span class="hljs-params">()</span>
+</span>{
+  ...
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; Become(Grumpy, discardOld: <span class="hljs-keyword">false</span>));
+}
 ...
-private void Grumpy()
-{
-  Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Snap out of it!"</span>, <span class="hljs-variable">_ =</span>&gt; Unbecome());
-  Receive&lt;string&gt;(<span class="hljs-variable">s =</span>&gt; <span class="hljs-variable">s =</span>= <span class="hljs-string">"Mood?"</span>, <span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"I'm grumpy!"</span>));
-  Receive&lt;string&gt;(<span class="hljs-variable">_ =</span>&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Grumpy</span><span class="hljs-params">()</span>
+</span>{
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Snap out of it!"</span>, _ =&gt; Unbecome());
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm grumpy!"</span>));
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(_ =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
 }
 </code></pre>
 <p>Using MoodActor:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">var</span> moodActor = system.ActorOf&lt;MoodActor&gt;();
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);            <span class="hljs-comment">// Result: "I'm neutral"</span>
-moodActor.Tell(<span class="hljs-string">"Grumpy"</span>, <span class="hljs-keyword">Self</span>);           <span class="hljs-comment">// Result: becomes Grumpy</span>
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);            <span class="hljs-comment">// Result: "I'm Grumpy"</span>
-moodActor.Tell(<span class="hljs-string">"Happy"</span>, <span class="hljs-keyword">Self</span>);            <span class="hljs-comment">// Result: "Leave me alone. I'm Grumpy!"</span>
-moodActor.Tell(<span class="hljs-string">"Snap out of it!"</span>, <span class="hljs-keyword">Self</span>);  <span class="hljs-comment">// Result: reverts back to neutral using Unbecome</span>
-moodActor.Tell(<span class="hljs-string">"Mood?"</span>, <span class="hljs-keyword">Self</span>);            <span class="hljs-comment">// Result: "I'm neutral"</span>
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">var</span> moodActor = system.ActorOf&lt;MoodActor&gt;();
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);            <span class="hljs-comment">// Result: "I'm neutral"</span>
+moodActor.Tell(<span class="hljs-string">"Grumpy"</span>, Self);           <span class="hljs-comment">// Result: becomes Grumpy</span>
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);            <span class="hljs-comment">// Result: "I'm Grumpy"</span>
+moodActor.Tell(<span class="hljs-string">"Happy"</span>, Self);            <span class="hljs-comment">// Result: "Leave me alone. I'm Grumpy!"</span>
+moodActor.Tell(<span class="hljs-string">"Snap out of it!"</span>, Self);  <span class="hljs-comment">// Result: reverts back to neutral using Unbecome</span>
+moodActor.Tell(<span class="hljs-string">"Mood?"</span>, Self);            <span class="hljs-comment">// Result: "I'm neutral"</span>
 </code></pre>
-<div class="alert alert-success">
+<div class="alert alert-default">
 <p><strong>Note</strong><br/> In this case care must be taken to ensure that the number of <code>Unbecome()</code> matches the number of <code>Become(..., discardOld: false)</code> ones in the long run, otherwise this amounts to a memory leak (which is why this behavior is not the default).</p>
+<p><strong>Warning</strong><br/>
+Do not add other statements than Receive in Become-declarations. The result of doing so is undefined.</p>
 </div>
-<p>You can reuse Receive-specifications:</p>
-<pre><code class="hljs lang-c#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> MoodActor : ReceiveActor
-{
-  <span class="hljs-keyword">public</span> <span class="hljs-title">MoodActor</span>()
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; Become(Grumpy, discardOld: <span class="hljs-keyword">false</span>));
+...
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Grumpy</span><span class="hljs-params">()</span>
+</span>{
+  _state = State.Grumpy;                      <span class="hljs-comment">//DO NOT do this</span>
+  Sender.Tell(<span class="hljs-string">"I just became grumpy"</span>, Self);  <span class="hljs-comment">//DO NOT do this</span>
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Snap out of it!"</span>, s =&gt; Unbecome());
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
+}
+</code></pre>
+<p>Any state changes or message sends should be in the handler:</p>
+<pre><code class="hljs lang-csharp">Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; 
   {
+    _state = State.Grumpy;
+    Sender.Tell(<span class="hljs-string">"I just became grumpy"</span>, Self);
+    Become(Grumpy, discardOld: <span class="hljs-keyword">false</span>));
+  });
+...
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Grumpy</span><span class="hljs-params">()</span>
+</span>{
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Snap out of it!"</span>, s =&gt; Unbecome());
+  Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
+}
+</code></pre>
+<h2 id="chaining-receives">Chaining Receives</h2>
+<p>You can reuse Receive-specifications. In the example below <code>ReceiveMoodSwitchers</code> contains declarations of how to handle messages for switching mood.</p>
+<pre><code class="hljs lang-csharp"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MoodActor</span> : <span class="hljs-title">ReceiveActor</span>
+{
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MoodActor</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm neutral"</span>));
     ReceiveMoodSwitchers();
   }
 
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Happy</span>()
-  {
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Happy</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm happy"</span>));
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Happy"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm already happy!"</span>, Self));
     ReceiveMoodSwitchers();
   }
 
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Angry</span>()
-  {
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Angry</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Mood?"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm angry"</span>)); 
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Angry"</span>, _ =&gt; Sender.Tell(<span class="hljs-string">"I'm already angry!"</span>, Self));
     ReceiveMoodSwitchers();
   }
 
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Grumpy</span>()
-  {
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Grumpy</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Snap out of it!"</span>, s =&gt; Unbecome());
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
   }
 
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ReceiveMoodSwitchers</span>()
-  {
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ReceiveMoodSwitchers</span><span class="hljs-params">()</span>
+  </span>{
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Happy"</span>, _ =&gt; Become(Happy));
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Angry"</span>, _ =&gt; Become(Angry));
     Receive&lt;<span class="hljs-keyword">string</span>&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; Become(Grumpy, discardOld: <span class="hljs-keyword">false</span>));
   }
 }
 </code></pre>
-<div class="alert alert-warning">
-<p><strong>Warning</strong><br/>
-Do not add other statements than Receive in Become-declarations. The result of doing so is undefined.</p>
-</div>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(s<span class="hljs-function"> =&gt;</span> s == <span class="hljs-string">"Grumpy"</span>, _<span class="hljs-function"> =&gt;</span> Become(Grumpy, <span class="hljs-attribute">discardOld</span>: <span class="hljs-literal">false</span>));
-...
-private <span class="hljs-reserved">void</span> Grumpy()
-{
-  _state = State.Grumpy;                      <span class="hljs-regexp">//</span>DO NOT <span class="hljs-keyword">do</span> <span class="hljs-keyword">this</span>
-  Sender.Tell(<span class="hljs-string">"I just became grumpy"</span>, Self);  <span class="hljs-regexp">//</span>DO NOT <span class="hljs-keyword">do</span> <span class="hljs-keyword">this</span>
-  Receive&lt;string&gt;(s<span class="hljs-function"> =&gt;</span> s == <span class="hljs-string">"Snap out of it!"</span>, s<span class="hljs-function"> =&gt;</span> Unbecome());
-  Receive&lt;string&gt;(s<span class="hljs-function"> =&gt;</span> Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
-}
-</code></pre>
-<p>Any state changes or message sends should be in the handler:</p>
-<pre><code class="hljs lang-c#">Receive&lt;string&gt;(s =&gt; s == <span class="hljs-string">"Grumpy"</span>, _ =&gt; 
-  {
-    _state = State.Grumpy;
-    Sender.Tell(<span class="hljs-string">"I just became grumpy"</span>, Self);
-    Become(Grumpy, discardOld: false));
-  });
-<span class="hljs-keyword">...</span>
-private void Grumpy()
-{
-  Receive&lt;string&gt;(s =&gt; s == <span class="hljs-string">"Snap out of it!"</span>, s =&gt; Unbecome());
-  Receive&lt;string&gt;(s =&gt; Sender.Tell(<span class="hljs-string">"Leave me alone. I'm Grumpy!"</span>));
-}
-</code></pre>
-<h3 id="actorbase-vs-receiveactor">ActorBase vs ReceiveActor</h3>
-<p>TODO</p>
-
+<h2 id="actorbase-vs-receiveactor">ActorBase vs ReceiveActor</h2>
+<p>TODO
+Just some points:
+Use ActorBase if you really, really need speed. ReceiveActors are a bit slower and will consume a bit more memory. Let&#39;s just hope we get <a href="http://www.infoq.com/news/2014/08/Pattern-Matching">pattern matching in C#</a> soon :)</p>
+</div> 
 
 								<div class="sky-form boxed">
 									<header>Leave a comment</header>
@@ -469,6 +474,7 @@ private void Grumpy()
 				</div>
 			</section>
 			<!-- /CONTENT -->
+
 
 
 			<!-- FOOTER -->
@@ -583,6 +589,5 @@ private void Grumpy()
 
 		<script type="text/javascript" src="/assets/js/scripts.js"></script>
 		<script type="text/javascript" src="/content/scripts.js"></script>
-		<a href="http://www.reactivemanifesto.org/"> <img style="border: 0px currentColor; left: 0px; top: 0px; position: fixed; z-index: 9000;" src="http://www.reactivemanifesto.org/images/ribbons/we-are-reactive-red-left.png"> </a>
 	</body>
 </html>

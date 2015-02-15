@@ -4,14 +4,14 @@
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title> What is Akka |  Akka.NET</title>
+		<title>What is Akka | Akka.NET</title>
 		<meta name="keywords" content="Actor,Finite state machine, concurrency" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
@@ -46,10 +46,11 @@
 		<link href="/assets/css/header-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-		<link href="/content/style.css" rel="stylesheet" type="text/css" />
+		
 		
 		<!-- Highlighting -->
-		<link href="https://highlightjs.org/static/styles/monokai_sublime.css" rel="stylesheet" type="text/css" />
+		<link href="https://highlightjs.org/static/styles/github.css" rel="stylesheet" type="text/css" />
+		<link href="/content/style.css" rel="stylesheet" type="text/css" />
 	
 		<!-- Morenizr -->
 		<script type="text/javascript" src="/assets/plugins/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 		Background Image - add to body: 
 			data-background="/assets/images/boxed_background/1.jpg"
 	-->
-	<body class="smoothscroll">
+	<body>
 
 		<div id="wrapper">
 
@@ -94,7 +95,7 @@
 
 						<!-- Logo -->
 						<a class="logo" href="/">
-							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:10px;" />
+							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
 						</a>
 
 					</div><!-- /.container -->
@@ -132,22 +133,21 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-								
-								<!-- pageurl wiki/What is Akka -->
+								<!-- pageurl  -->
 								<ul id="topMain" class="nav nav-pills nav-main">
-									<li class="mega-menu">
+									<li class="mega-menu{% if page.layout == "master" %} active{% endif %}">
 										<a href="/">
 											HOME <span>welcome</span>
 										</a>
 									</li>
-									<li class="mega-menu">										
+									<li class="mega-menu{% if page.layout == 'wiki' %} active{% endif %}">										
 										<a href="/wiki/">DOCUMENTATION <span>Wiki</span></a>
 									</li>
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net">CODE <span>Github repository</span></a>
 									</li>
 									<li class="mega-menu">
-										<a href="https://groups.google.com/forum/?hl=sv#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
+										<a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
 									</li>	
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net/issues">TRACKER <span>Issues and Features</span></a>
@@ -164,7 +164,8 @@
 
 			</div>
 
-						<!-- PAGE TOP -->
+			
+			<!-- PAGE TOP -->
 			<section class="page-title">
 				<div class="container">
 
@@ -173,7 +174,7 @@
 						<ul class="breadcrumb"><!-- breadcrumb -->
 							<li><a href="/">Home</a></li>
 							<li><a href="/wiki/">Wiki</a></li>
-							<li class="active"> What is Akka  <a href="https://github.com/akkadotnet/akka.net/wiki/What is Akka/_edit"> (edit)</a></li>							
+							<li class="active">{% if page.title %} What is Akka {% endif %} <a href="https://github.com/akkadotnet/akka.net/edit/dev/documentation/wiki/What is Akka.md" > (edit)</a></li>							
 						</ul><!-- /breadcrumb -->
 
 						<h2><!-- Page Title -->
@@ -201,13 +202,15 @@
 						<div class="col-md-9">
 							<div id="main_content">
 
-								<h1 id="what-is-akka-">What is Akka?</h1>
-<h3 id="scalable-real-time-transaction-processing">Scalable real-time transaction processing</h3>
-<p>We believe that writing correct concurrent, fault-tolerant and scalable applications is too hard. Most of the time it&#39;s because we are using the wrong tools and the wrong level of abstraction. Akka is here to change that. Using the Actor Model we raise the abstraction level and provide a better platform to build scalable, resilient and responsive applications—see the Reactive Manifesto for more details. For fault-tolerance we adopt the &quot;let it crash&quot; model which the telecom industry has used with great success to build applications that self-heal and systems that never stop. Actors also provide the abstraction for transparent distribution and the basis for truly scalable and fault-tolerant applications.</p>
-<p>Akka is Open Source and available under the Apache 2 License.</p>
+								<div class="mybold"><h1 id="what-is-akka-">What is Akka?</h1>
+<h2 id="scalable-distributed-real-time-transaction-processing">Scalable, distributed real-time transaction processing</h2>
+<p>We believe that writing correct concurrent, fault-tolerant and scalable applications is too hard. </p>
+<p>Most of the time, that&#39;s because we are using the wrong tools and the wrong level of abstraction. Akka is here to change that. </p>
+<p>By using the Actor Model, we raise the abstraction level and provide a better platform to build scalable, resilient and responsive applications—see the <a href="http://www.reactivemanifesto.org/">Reactive Manifesto</a> for more details. </p>
+<p>For fault-tolerance we adopt the &quot;let it crash&quot; model which the telecom industry has used with great success to build applications that self-heal and systems that never stop. Actors also provide the abstraction for transparent distribution and the basis for truly scalable and fault-tolerant applications.</p>
+<p>Akka.NET is Open Source and available under the Apache 2 License.</p>
 <p>Download from <a href="https://github.com/akkadotnet/akka.net">https://github.com/akkadotnet/akka.net</a>.</p>
-<p>Please note that all code samples compile, so if you want direct access to the sources, have a look over at the Akka Docs subproject on github: for Java and Scala.</p>
-<h2 id="akka-implements-a-unique-hybrid">Akka implements a unique hybrid</h2>
+<h2 id="a-unique-hybrid">A unique hybrid</h2>
 <h3 id="actors">Actors</h3>
 <p>Actors give you:</p>
 <ul>
@@ -219,23 +222,33 @@ See the chapter for C# or F#.</li>
 <h3 id="fault-tolerance">Fault Tolerance</h3>
 <ul>
 <li>Supervisor hierarchies with &quot;let-it-crash&quot; semantics.</li>
-<li>Supervisor hierarchies can span over multiple JVMs to provide truly fault-tolerant systems.</li>
+<li>Supervisor hierarchies can span over multiple virtual machines to provide truly fault-tolerant systems.</li>
 <li>Excellent for writing highly fault-tolerant systems that self-heal and never stop.
-See Fault Tolerance (Scala) and Fault Tolerance (Java).</li>
+See <a href="../Fault%20tolerance">Fault Tolerance</a>.</li>
 </ul>
 <h3 id="location-transparency">Location Transparency</h3>
 <p>Everything in Akka is designed to work in a distributed environment: all interactions of actors use pure message passing and everything is asynchronous.</p>
-<p>For an overview of the cluster support see the Java and Scala documentation chapters.</p>
+<p>Clustering support is currently in beta. <a href="https://github.com/akkadotnet/akka.net/pull/400">See here for details</a>.</p>
 <h3 id="persistence">Persistence</h3>
-<p>Messages received by an actor can optionally be persisted and replayed when the actor is started or restarted. This allows actors to recover their state, even after JVM crashes or when being migrated to another node.</p>
-<p>You can find more details in the respective chapter for Java or Scala.</p>
-<h2 id="c-and-f-apis">C# and F# APIs</h2>
-<p>Akka has both a C# Documentation and a F# Documentation.</p>
-<h2 id="akka-can-be-used-in-two-different-ways">Akka can be used in two different ways</h2>
-<p>TODO</p>
-<h2 id="commercial-support">Commercial Support</h2>
-<p>TODO</p>
+<p>Akka.Persistence is currently in beta and is under very active development. <a href="https://github.com/Horusiath/akka.net/tree/akka-persistence/src/core/Akka.Persistence">Follow the development and learn more here</a>.</p>
+<!--
+TODO
+Messages received by an actor can optionally be persisted and replayed when the actor is started or restarted. This allows actors to recover their state, even after the CLR crashes or when being migrated to another node.
 
+You can find more details in the respective chapter for Java or Scala.
+
+-->
+<!-- 
+TODO
+## C# and F# APIs
+Akka has both a C# Documentation and a F# Documentation. -->
+<h2 id="commercial-support">Commercial Support</h2>
+<p>Akka.NET is supported by <a href="http://petabridge.com">Petabridge, a company making distributed, realtime computing easy for .NET developers</a>.</p>
+<!-- 
+TODO
+## Akka can be used in two different ways
+-->
+</div> 
 
 								<div class="sky-form boxed">
 									<header>Leave a comment</header>
@@ -268,6 +281,7 @@ See Fault Tolerance (Scala) and Fault Tolerance (Java).</li>
 				</div>
 			</section>
 			<!-- /CONTENT -->
+
 
 
 			<!-- FOOTER -->
@@ -382,6 +396,5 @@ See Fault Tolerance (Scala) and Fault Tolerance (Java).</li>
 
 		<script type="text/javascript" src="/assets/js/scripts.js"></script>
 		<script type="text/javascript" src="/content/scripts.js"></script>
-		<a href="http://www.reactivemanifesto.org/"> <img style="border: 0px currentColor; left: 0px; top: 0px; position: fixed; z-index: 9000;" src="http://www.reactivemanifesto.org/images/ribbons/we-are-reactive-red-left.png"> </a>
 	</body>
 </html>

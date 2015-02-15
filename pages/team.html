@@ -4,14 +4,14 @@
 <!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8" />
-		<title> Akka.NET</title>
+		<title>Our team | Akka.NET</title>
 		<meta name="keywords" content="Actor,Finite state machine, concurrency" />
 		<meta name="description" content="" />
 		<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 		<!-- mobile settings -->
-		<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+		<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" href="/assets/images/demo/favicon.ico" />
@@ -46,10 +46,11 @@
 		<link href="/assets/css/header-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/footer-default.css" rel="stylesheet" type="text/css" />
 		<link href="/assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
-		<link href="/content/style.css" rel="stylesheet" type="text/css" />
+		
 		
 		<!-- Highlighting -->
-		<link href="https://highlightjs.org/static/styles/monokai_sublime.css" rel="stylesheet" type="text/css" />
+		<link href="https://highlightjs.org/static/styles/github.css" rel="stylesheet" type="text/css" />
+		<link href="/content/style.css" rel="stylesheet" type="text/css" />
 	
 		<!-- Morenizr -->
 		<script type="text/javascript" src="/assets/plugins/modernizr.min.js"></script>
@@ -69,7 +70,7 @@
 		Background Image - add to body: 
 			data-background="/assets/images/boxed_background/1.jpg"
 	-->
-	<body class="smoothscroll">
+	<body>
 
 		<div id="wrapper">
 
@@ -94,7 +95,7 @@
 
 						<!-- Logo -->
 						<a class="logo" href="/">
-							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:10px;" />
+							<img src="/content/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
 						</a>
 
 					</div><!-- /.container -->
@@ -132,22 +133,21 @@
 										<a href="#">HOME</a>
 									</li>
 								-->
-								
-								<!-- pageurl pages/team -->
+								<!-- pageurl  -->
 								<ul id="topMain" class="nav nav-pills nav-main">
-									<li class="mega-menu">
+									<li class="mega-menu{% if page.layout == "master" %} active{% endif %}">
 										<a href="/">
 											HOME <span>welcome</span>
 										</a>
 									</li>
-									<li class="mega-menu">										
+									<li class="mega-menu{% if page.layout == 'wiki' %} active{% endif %}">										
 										<a href="/wiki/">DOCUMENTATION <span>Wiki</span></a>
 									</li>
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net">CODE <span>Github repository</span></a>
 									</li>
 									<li class="mega-menu">
-										<a href="https://groups.google.com/forum/?hl=sv#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
+										<a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILINGLIST <span>Discuss</span></a>
 									</li>	
 									<li class="mega-menu">
 										<a href="https://github.com/akkadotnet/akka.net/issues">TRACKER <span>Issues and Features</span></a>
@@ -164,7 +164,8 @@
 
 			</div>
 
-			<!-- PAGE TOP -->
+			
+<!-- PAGE TOP -->
 <section class="page-title">
 	<div class="container">
 
@@ -181,7 +182,7 @@
 
 		</header>
 
-	</div>			
+	</div>
 </section>
 <!-- /PAGE TOP -->
 
@@ -191,7 +192,7 @@
 	<div class="row">
 		<div class="col-md-12">
 		<i class="fa fa-warning"></i>
-		This is a community driven port and is not affiliated with <a href="http://typesafe.com">Typesafe</a> who makes the original Java/Scala version of <a href="http://akka.io">Akka</a>.<br/> 
+		This is a community driven port and is not affiliated with <a href="http://typesafe.com">Typesafe</a> who makes the original Java/Scala version of <a href="http://akka.io">Akka</a>.<br/>
 		</div>
 	</div>
 </section>
@@ -199,9 +200,7 @@
 <section>
 	<div class="container">
 
-		<p class="lead">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
-		<p>Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this totam rem aperiam, eaque ipsa qu ab illo inventore veritatis et quasi architectos beatae vitae dicta sunt explicabo. Nemo enim sadips ipsums dolores sit.Nemo enims sadips ipsums un inventore veritatis et quasi.</p>
-
+		<p class="lead">Meet the core Akka.NET team below.</p>
 
 
 		<div class="row">
@@ -219,14 +218,14 @@
 									<small class="block">Founder / Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/rogeralsing" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/rogeralsing" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">Roger is the original creator of the Akka.NET project. C# developer and mentor living in Sweden. Open source enthusiast. Started programming at the age of 10 on the mighty Commodore64. <a href="http://twitter.com/rogeralsing">Follow Roger on Twitter</a> or at his <a href="http://rogeralsing.com/">personal blog</a>. Works at <a href="http://Nethouse.se">Nethouse.se</a></p>
 					</div>
 				</div>
 			</div>
@@ -244,14 +243,14 @@
 									<small class="block">Founder / Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/aaronontheweb" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/aaronontheweb" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">Aaron is Founder and CTO at <a href="http://petabridge.com">Petabridge, a .NET data platform company</a>. Aaron's one of the original contributors to Akka.NET, authoring the Akka.Remote module and Helios, the underlying socket server. Prior to working at Petabridge Aaron founded MarkedUp Analytics, a Cassandra and Akka.NET-powered real-time app analytics and marketing automation company for app developers.</p>
 					</div>
 				</div>
 			</div>
@@ -269,14 +268,14 @@
 									<small class="block">Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/hcanber" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/hcanber" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">Håkan developed the Akka.NET TestKit and internals, and by day is a developer & architect at <a href="http://www.ving.se/">Thomas Cook</a>. Follow Håkan <a href="https://twitter.com/hcanber">on Twitter</a> or at <a href="http://blog.canberger.se/">his personal blog</a>.</p>
 					</div>
 				</div>
 			</div>
@@ -294,14 +293,14 @@
 									<small class="block">Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/Horusiath" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/Horusiath" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">Bartosz wrote the Akka.NET F# API, and works at <a href="http://rd.samsung.pl/?lang=en">Samsung R&D, Poland</a>. Follow <a href="https://twitter.com/horusiath">Bartosz on Twitter</a> or at <a href="http://bartoszsypytkowski.com/">his personal blog</a>.</p>
 					</div>
 				</div>
 			</div>
@@ -319,14 +318,14 @@
 									<small class="block">Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/smalldave" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/smalldave" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">David contributed Akka.Cluster and MultiNodeTestkit, and is a developer at <a href="https://www.travelrepublic.co.uk/">Travel Republic</a> in the UK. Follow David on <a href="https://github.com/smalldave">GitHub</a>.</p>
 					</div>
 				</div>
 			</div>
@@ -344,14 +343,14 @@
 									<small class="block">Core team</small>
 								</h4>
 							</div>
-							<div class="pull-right">						
+							<div class="pull-right">
 								<a href="http://twitter.com/thinkb4coding" class="btn ico-only btn-twitter btn-xs"><i class="fa fa-twitter"></i></a>
 								<a href="https://github.com/thinkbeforecoding" class="btn ico-only btn-stackoverflow btn-xs"><i class="fa fa-github"></i></a>
 							</div>
 
 						</div>
 
-						<p class="noborder nomargin nopadding">Lorem ipsum dolor sit amet. Etharums your template rerum facilis dolores nemis omnis fugats vitaes you need this.</p>
+						<p class="noborder nomargin nopadding">Jérémie is an F# developer hailing from Paris, France. Follow him on <a href="https://twitter.com/thinkb4coding">Twitter</a> or at his personal blog, <a href="http://thinkbeforecoding.com/">Think Before Coding</a>.</p>
 					</div>
 				</div>
 			</div>
@@ -473,6 +472,5 @@
 
 		<script type="text/javascript" src="/assets/js/scripts.js"></script>
 		<script type="text/javascript" src="/content/scripts.js"></script>
-		<a href="http://www.reactivemanifesto.org/"> <img style="border: 0px currentColor; left: 0px; top: 0px; position: fixed; z-index: 9000;" src="http://www.reactivemanifesto.org/images/ribbons/we-are-reactive-red-left.png"> </a>
 	</body>
 </html>
