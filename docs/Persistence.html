@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
+	<head>
+		
+
+<meta charset="utf-8" />
+<title>Persistence | Akka.NET</title>
+
+<meta name="keywords" content="Actor,Finite state machine, concurrency" />
+<meta name="description" content="" />
+<meta name="Author" content="Dorin Grigoras [www.stepofweb.com]" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- mobile settings -->
+<meta name="viewport" contenht="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="/theme_assets/images/demo/favicon.ico" />
+
+<!-- WEB FONTS -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css" />
+
+<!-- CORE CSS -->
+<link href="/theme_assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/sky-forms.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/weather-icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/line-icons.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/plugins/owl-carousel/owl.pack.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/animate.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/flexslider.css" rel="stylesheet" type="text/css" />
+
+<!-- FAV ICON -->
+<link rel="shortcut icon" href="http://akkadotnet.github.io/favicon.ico?v=2" />
+
+<!-- REVOLUTION SLIDER -->
+<link href="/theme_assets/css/revolution-slider.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/layerslider.css" rel="stylesheet" type="text/css" />
+
+<!-- BLOG -->
+<link href="/theme_assets/css/layout-blog.css" rel="stylesheet" type="text/css" />
+
+<!-- THEME CSS -->
+<link href="/theme_assets/css/essentials.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/layout.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/header-default.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/footer-default.css" rel="stylesheet" type="text/css" />
+<link href="/theme_assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
+
+<!-- Highlighting -->
+<link href="https://highlightjs.org/static/demo/styles/github.css" rel="stylesheet" type="text/css" />
+<link href="/css/screen.css" rel="stylesheet" type="text/css" />
+
+<!-- Modernizr -->
+<script type="text/javascript" src="/theme_assets/plugins/modernizr.min.js"></script>
+
+<!--[if lte IE 8]>
+  <script src="/theme_assets/plugins/respond.js"></script>
+<![endif]-->
+
+	</head>
+
+	<!--
+		Available body classes:
+			smoothscroll			= enable chrome browser smooth scroll
+			grey 					= grey content background
+			boxed 					= boxed style
+			pattern1 ... pattern10 	= background pattern
+
+		Background Image - add to body:
+			data-background="/theme_assets/images/boxed_background/1.jpg"
+	-->
+	<body class=" smoothscroll">
+
+		<div id="wrapper">
+			<div id="header">
+  <header id="topBar">
+    <div class="container">
+
+      
+
+      <!-- Logo -->
+      <a class="logo" href="/">
+        <img src="/images/akkalogo.png"  alt="" style="padding-top:0px;padding-left: 5px;" />
+      </a>
+
+    </div><!-- /.container -->
+  </header>
+  <div id="topNav">
+  <div class="container">
+    <!-- Mobile Menu Button -->
+    <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+      <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Search -->
+    <form class="search" method="get" action="/search">
+      <input type="text" class="form-control" name="q" value="" placeholder="Search">
+      <button class="fa fa-search"></button>
+    </form>
+    <!-- /Search -->
+
+    <!-- Top Nav -->
+    <div class="navbar-collapse nav-main-collapse collapse inline-block">
+      <nav class="nav-main">
+
+      
+
+        <!-- pageurl  -->
+        <ul id="topMain" class="nav nav-pills nav-main">
+          <li class="mega-menu  active">
+            <a href="/docs/">DOCUMENTATION<span>&nbsp;</span></a>
+          </li>
+          <li class="mega-menu">
+            <a href="https://github.com/akkadotnet/akka.net/">CODE<span>&nbsp;</span></a>
+          </li>
+          <li class="mega-menu">
+            <a href="https://gitter.im/akkadotnet/akka.net">PROJECT CHAT<span>&nbsp;</span></a>
+          </li>
+          <li class="mega-menu">
+            <a href="https://groups.google.com/forum/#!forum/akkadotnet-user-list">MAILING LIST<span>&nbsp;</span></a>
+          </li>
+          <li class="mega-menu ">
+            <a href="/pages/support">COMMERCIAL SUPPORT<span>&nbsp;</span></a>
+          </li>
+          <li class="mega-menu ">
+            <a href="/docs/Resources">RESOURCES<span>&nbsp;</span></a>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+</div>
+</div>
+			
+
+			<!-- PAGE TOP -->
+			<section class="page-title">
+				<div class="container">
+					<header>
+						<ul class="breadcrumb"><!-- breadcrumb -->
+							<li><a href="/">Home</a></li>
+							<li><a href="/docs/">Docs</a></li>
+							<li class="active">Persistence<a href="https://github.com/akkadotnet/getakka.net/edit/master/src/docs/Persistence.md" > (Edit on Github)</a></li>
+						</ul><!-- /breadcrumb -->
+
+						<h2><!-- Page Title -->
+							<strong>Akka.NET</strong> Docs
+						</h2><!-- /Page Title -->
+
+					</header>
+
+				</div>
+			</section>
+			<!-- /PAGE TOP -->
+
+			<!-- CONTENT -->
+			<section>
+				<div class="container">
+
+					<div class="row">
+
+						<!-- RIGHT COLUMNS -->
+						<div class="col-md-3" id="toc">
+						</div>
+						<!-- /RIGHT COLUMNS -->
+
+						<!-- LEFT COLUMNS -->
+						<div class="col-md-8 docs-content">
+							<div id="main_content">
+
+								<div><h2 id="persistence">Persistence</h2>
+<p>Akka.Persistence plugin enables the creation of stateful actors whose internal state may be stored inside persistent data storage and used for recovery in case of restart, migration or VM crash. The core concept behind Akka persistence lays in storing not only the actor&#39;s state directly (in the form of snapshots) but also history of all of the changes of that actor&#39;s state. This is quite  useful solution common in patterns such as eventsourcing. Changes are immutable by nature, as they describe facts already reported in the history, and can be stored inside event journal in append-only mode. While recovering, the actor restores it&#39;s state from the latests snapshot available - which can reduce recovery time - and then recreates it further by replaying events stored inside the journal. Among other features provided by the persistence plugin is support for command query segregation model and point-to-point communication with <a href="concepts/message-delivery-reliability#discussion-what-does-at-most-once-mean-">at-least-once</a> delivery semantics.</p>
+<h3 id="architecture">Architecture</h3>
+<p>Akka.Persistence features are available through new set of actor base classes:</p>
+<ul>
+<li><code>PersistentActor</code> is a persistent, stateful equivalent of the <code>ActorBase</code> class. It&#39;s able to persist events inside the journal, creating snapshots in snapshot stores and recover from them in a  thread-safe manner. It can be used for both changing and reading state of the actor.</li>
+<li><code>PersistentView</code> is used to recreate the internal state of other persistent actor based on journaled messages. It works in a read-only manner - it cannot journal any event by itself.</li>
+<li><code>GuaranteedDeliveryActor</code> may be used to ensure <a href="concepts/message-delivery-reliability#discussion-what-does-at-most-once-mean-">at-least-once</a> delivery semantics between communicating actors, even in case when either sender or receiver VM crashes.</li>
+<li><code>Journal</code> stores a sequence of events send by the persistent actor. The storage backend of the journal is pluggable. By default it uses an in-memory message stream and is NOT a persistent storage.</li>
+<li><code>Snapshot store</code> is used to persist snapshots of either persistent actor&#39;s or view&#39;s internal state. They can be used to reduce recovery times in case when a lot of events needs to be replayed for specific persistent actor. Storage backend of the snapshot store is pluggable. By default it uses local file system.</li>
+</ul>
+<h3 id="persistent-actors">Persistent actors</h3>
+<p>Unlike the default <code>ActorBase</code> class, <code>PersistentActor</code> and it&#39;s derivatives requires the setup of a few more additional members:</p>
+<ul>
+<li><code>PersistenceId</code> is a persistent actor&#39;s identifier that doesn&#39;t change across different actor incarnations. It&#39;s used to retrieve an event stream required by the persistent actor to recover it&#39;s internal state.</li>
+<li><code>ReceiveRecover</code> is a method invoked during an actor&#39;s recovery cycle. Incoming objects may be user-defined events as well as system messages, for example <code>SnapshotOffer</code> which is used to deliver latest actor state saved in the snapshot store.</li>
+<li><code>ReceiveCommand</code> is an equivalent of the basic <code>Receive</code> method of default Akka.NET actors.</li>
+</ul>
+<p>Persistent actors also offer a set of specialized members:</p>
+<ul>
+<li><code>Persist</code> and <code>PersistAsync</code> methods can be used to send events to the event journal in order to store them inside. The second argument is a callback invoked when the journal confirms that events have been stored successfully.</li>
+<li><code>Defer</code> and <code>DeferAsync</code> are used to perform various operations <em>after</em> events will be persisted and their callback handlers will be invoked. Unlike the persist methods, defer won&#39;t store an event in persistent storage. Defer methods may NOT be invoked in case when the actor is restarted even though the journal will successfully persist events sent.</li>
+<li><code>DeleteMessages</code> will order attached journal to remove part of it&#39;s events. It can be either logical deletion - messages are marked as deleted, but are not removed physically from the backend storage - or a physical one, when the messages are removed physically from the journal.</li>
+<li><code>LoadSnapshot</code> will send a request to the snapshot store to resend the current actor&#39;s snapshot.</li>
+<li><code>SaveSnapshot</code> will send the current actor&#39;s internal state as a snapshot to be saved by the configured snapshot store.</li>
+<li><code>DeleteSnapshot</code> and <code>DeleteSnapshots</code> methods may be used to specify snapshots to be removed from the snapshot store in cases where they are no longer needed.</li>
+<li><code>OnReplaySuccess</code> is a virtual method which will be called when the recovery cycle ends successfully.</li>
+<li><code>OnReplayFailure</code> is a virtual method which will be called when the recovery cycle fails unexpectedly from some reason.</li>
+<li><code>IsRecovering</code> property determines if the current actor is performing a recovery cycle at the moment.</li>
+<li><code>SnapshotSequenceNr</code> property may be used to determine the sequence number used for marking persisted events. This value changes in a monotonically increasing manner.</li>
+</ul>
+<p>In case a manual recovery cycle initialization is necessary, it may be invoked by sending a <code>Recover</code> message to a persistent actor.</p>
+<h3 id="persistent-views">Persistent views</h3>
+<p>While a persistent actor may be used to produce and persist events, views are used only to read internal state based on them. Like the persistent actor, a view has a <code>PersistenceId</code> to specify a  collection of events to be resent to current view. This value should however be correlated with the  <code>PersistentId</code> of an actor who is the producer of the events.</p>
+<p>Other members:</p>
+<ul>
+<li><code>ViewId</code> property is a view unique identifier that doesn&#39;t change across different actor incarnations. It&#39;s useful in cases where there are multiple different views associated with a single persistent actor, but showing its state from a different perspectives.</li>
+<li><code>IsAutoUpdate</code> property determines if the view will try to automatically update its state in specified time intervals. Without it, the view won&#39;t update its state until it receives an explicit <code>Update</code> message. This value can be set through configuration with <em>akka.persistence.view.auto-update</em> set to either <em>on</em> (by default) or <em>off</em>.</li>
+<li><code>AutoUpdateInterval</code> specifies a time interval in which the view will be updating itself - only in cases where the <em>IsAutoUpdate</em> flag is on. This value can be set through configuration with <em>akka.persistence.view.auto-update-interval</em> key (5 seconds by default).</li>
+<li><code>AutoUpdateReplayMax</code> property determines the maximum number of events to be replayed during a single <em>Update</em> cycle. This value can be set through configuration with <em>akka.persistence.view.auto-update-replay-max</em> key (by default it&#39;s -1 - no limit).</li>
+<li><code>LoadSnapshot</code> will send a request to the snapshot store to resend a current view&#39;s snapshot.</li>
+<li><code>SaveSnapshot</code> will send the current view&#39;s internal state as a snapshot to be saved by the  configured snapshot store.</li>
+<li><code>DeleteSnapshot</code> and <code>DeleteSnapshots</code> methods may be used to specify snapshots to be removed from the snapshot store in cases where they are no longer needed.</li>
+</ul>
+<h3 id="guaranteed-delivery">Guaranteed delivery</h3>
+<p>Guaranteed delivery actors are specializations of persistent actors and may be used to provide <a href="concepts/message-delivery-reliability#discussion-what-does-at-most-once-mean-">at-least-once</a> delivery semantics, even in cases where one of the communication endpoints crashes. Because it&#39;s possible that the same message will be send twice, actor&#39;s receive behavior must work in the idempotent manner.</p>
+<p>Members:</p>
+<ul>
+<li><code>Deliver</code> method is used to send a message to another actor in <a href="concepts/message-delivery-reliability#discussion-what-does-at-most-once-mean-">at-least-once</a> delivery semantics. A message sent this way must be confirmed by the other endpoint with the  <code>ConfirmDelivery</code> method. Otherwise it will be resent again and again until the redelivery limit is reached.</li>
+<li><code>GetDeliverySnapshot</code> and <code>SetDeliverySnapshot</code> methods are used as part of a delivery snapshotting strategy. They return/reset state of the current guaranteed delivery actor&#39;s unconfirmed messages. In order to save custom deliverer state inside a snapshot, a returned delivery snapshot should be included in that snapshot and reset in <em>ReceiveRecovery</em> method, when <code>SnapshotOffer</code> arrives.</li>
+<li><code>RedeliveryBurstLimit</code> is a virtual property which determines the maximum number of unconfirmed messages to be send in each redelivery attempt. It may be useful in preventing message overflow scenarios. It may be overridden or configured inside HOCON configuration under <em>akka.persistence.at-least-once-delivery.redelivery-burst-limit</em> path (10 000 by default).</li>
+<li><code>UnconfirmedDeliveryAttemptsToWarn</code> is a virtual property which determines how many unconfirmed deliveries may be sent before guaranteed delivery actor will send an <code>UnconfirmedWarning</code> message to itself. The count is reset after the actor&#39;s restart. It may be overridden or configured inside HOCON configuration under <em>akka.persistence.at-least-once-delivery.warn-after-number-of-unconfirmed-attempts</em> path (5 by default).</li>
+<li><code>MaxUnconfirmedMessages</code> is a virtual property which determines the maximum number of unconfirmed deliveries to hold in memory. After this threshold is exceeded, any <code>Deliver</code> method will raise <code>MaxUnconfirmedMessagesExceededException</code>. It may be overridden or configured inside HOCON configuration under <em>akka.persistence.at-least-once-delivery.max-unconfirmed-messages</em> path (100 000 by default).</li>
+<li><code>UnconfirmedCount</code> property shows the number of unconfirmed messages.</li>
+</ul>
+<h3 id="journals">Journals</h3>
+<p>Journal is a specialized type of actor which exposes an API to handle incoming events and store them in backend storage. By default Akka.Persitence uses a <code>MemoryJournal</code> which stores all events in memory and therefore it&#39;s not persistent storage. A custom journal configuration path may be specified inside <em>akka.persistence.journal.plugin</em> path and by default it requires two keys set: <em>class</em> and <em>plugin-dispatcher</em>. Example configuration:</p>
+<pre><code class="hljs lang-hocon"><span class="hljs-title">akka</span> {
+    <span class="hljs-title">persistence</span> {
+        <span class="hljs-title">journal</span> {
+
+            <span class="hljs-comment"># Path to the journal plugin to be used</span>
+            <span class="hljs-title">plugin</span> = <span class="hljs-string">"akka.persistence.journal.inmem"</span>
+
+            <span class="hljs-comment"># In-memory journal plugin.</span>
+            inmem {
+
+                <span class="hljs-comment"># Class name of the plugin.</span>
+                <span class="hljs-title">class</span> = <span class="hljs-string">"Akka.Persistence.Journal.MemoryJournal, Akka.Persistence"</span>
+
+                <span class="hljs-comment"># Dispatcher for the plugin actor.</span>
+                plugin-dispatcher = <span class="hljs-string">"akka.actor.default-dispatcher"</span>
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="snapshot-store">Snapshot store</h3>
+<p>Snapshot store is a specialized type of actor which exposes an API to handle incoming snapshot-related requests and is able to save snapshots in some backend storage. By default Akka.Persistence uses a <code>LocalSnapshotStore</code>, which uses a local file system as storage. A custom snapshot store configuration path may be specified inside <em>akka.persistence.snapshot-store.plugin</em> path and by default it requires two keys set: <em>class</em> and <em>plugin-dispatcher</em>. Example configuration:</p>
+<pre><code class="hljs lang-hocon">akka {
+    persistence {
+        snapshot-store {
+
+            # Path to the snapshot store <span class="hljs-keyword">plugin</span> to be used
+            <span class="hljs-keyword">plugin</span> = <span class="hljs-string">"akka.persistence.snapshot-store.local"</span>
+
+            # <span class="hljs-keyword">Local</span> filesystem snapshot store <span class="hljs-keyword">plugin</span>.
+            <span class="hljs-keyword">local</span> {
+
+                # <span class="hljs-keyword">Class</span> name of the <span class="hljs-keyword">plugin</span>.
+                <span class="hljs-keyword">class</span> = <span class="hljs-string">"Akka.Persistence.Snapshot.LocalSnapshotStore, Akka.Persistence"</span>
+
+                # Dispatcher <span class="hljs-keyword">for</span> the <span class="hljs-keyword">plugin</span> actor.
+                <span class="hljs-keyword">plugin</span>-dispatcher = <span class="hljs-string">"akka.persistence.dispatchers.default-plugin-dispatcher"</span>
+
+                # Dispatcher <span class="hljs-keyword">for</span> streaming snapshot IO.
+                stream-dispatcher = <span class="hljs-string">"akka.persistence.dispatchers.default-stream-dispatcher"</span>
+
+                # Storage location of snapshot files.
+                <span class="hljs-keyword">dir</span> = <span class="hljs-string">"snapshots"</span>
+            }
+        }
+    }
+}
+</code></pre>
+<h3 id="event-adapters">Event adapters</h3>
+<p>Event adapters are an intermediate layer on top of your journal, that allows to produce different data model depending on stored/recovered event type. It&#39;s especially useful in situations like:</p>
+<ul>
+<li><strong>Event versioning</strong> - since events may change their structure over the course of time, you may specify custom event adapter that will deal with mapping obsolete data types accordingly to current business logic.</li>
+<li><strong>Separation of domain model from stored data</strong> in cases when such separation is necessary.</li>
+<li><strong>Utilization of persistent backend specific data types</strong> as they allow transition between data understood by actors and specialized format allowed by datastores. Examples of such may be: BSON in MongoDb or JSON data type in PostgreSQL.</li>
+</ul>
+<p>For custom event adapter simply create class implementing <code>IEventAdapter</code> interface. It&#39;s required, that it should either expose parameterless constructor or the one that has <code>ExtendedActorSystem</code> as it&#39;s only argument. Then in order to use it, you&#39;ll need to register it and bind to a particular type of events using HOCON configuration - type assignability rules applies here and the most specific types have precedence over the more general ones:</p>
+<pre><code><span class="hljs-label">akka.persistence.journal</span> {
+    &lt;journal_identifier&gt; {
+        event-adapters {
+            tagging = <span class="hljs-string">"&lt;fully qualified event adapter type name with assembly&gt;"</span>
+            <span class="hljs-literal">v1</span> = <span class="hljs-string">"&lt;fully qualified event adapter type name with assembly&gt;"</span>
+            <span class="hljs-literal">v2</span> = <span class="hljs-string">"&lt;fully qualified event adapter type name with assembly&gt;"</span>
+        }
+
+        event-adapter-<span class="hljs-keyword">bindings </span>{
+            <span class="hljs-string">"&lt;fully qualified event type name with assembly&gt;"</span> = <span class="hljs-literal">v1</span>
+            <span class="hljs-string">"&lt;fully qualified event type name with assembly&gt;"</span> = [<span class="hljs-literal">v2</span>, tagging]
+        }
+    }
+}
+</code></pre><p>Multiple event adapters may be applied to a single type (for recovery). If that is the case, their order will match order of the definition in <em>event-adapter-bindings</em> config section. For write side, each adapter may decide to return none, one or many adapted event for each single event provided as an input. In case of multiple adapters attached, each one of them may decide to return it&#39;s own set of adapted events. They all will be stored in the same order corresponding to adapters order.</p>
+<h3 id="contributing">Contributing</h3>
+<p>Akka persistence plugin gives a custom journal and snapshot store creator a built-in set of tests, which can be used to verify correctness of the implemented backend storage plugins. It&#39;s available through <code>Akka.Persistence.TestKit</code> package and uses <a href="http://xunit.github.io/">xUnit</a> as the default test framework.</p>
+</div>
+
+								
+
+						</div>
+						<div class="col-md-1">&nbsp;</div>
+						<!-- /LEFT COLUMNS -->
+
+
+
+					</div>
+
+				</div>
+			</section>
+			<!-- /CONTENT -->
+
+			<footer id="footer">
+  <div class="container">
+    <div class="row">
+        <!-- col #1 -->
+        <div class="spaced dark col-md-3">
+            <h4>About <strong>Akka.NET</strong></h4>
+            <p class="block">
+                Akka.NET is a port of the popular
+                <br/> Java/Scala framework <a href="http://akka.io">Akka</a> to .NET.
+                <br/>
+                <br/> This is a community driven port and
+                <br/> is not affiliated with <a href="http://typesafe.com">Typesafe</a> who
+                <br/> makes the original Java/Scala version.
+                <br/>
+            </p>
+            <!-- social -->
+            <p class="block">
+                <a href="mailto:hi@getakka.net">hi@getakka.net</a><br>
+                <a href="https://www.facebook.com/akkadotnet" class="social fa fa-facebook"></a>
+                <a href="http://stackoverflow.com/questions/tagged/akka.net" class="social fa fa-stack-overflow"></a>
+                <a href="https://twitter.com/AkkaDotNET" class="social fa fa-twitter"></a>
+            </p><!-- /social -->
+        </div>
+        <!-- /col #1 -->
+        <!-- col #3 -->
+        <div class="spaced col-md-6 col-sm-4">
+            <h4>Recent <strong>Tweets</strong></h4>
+            <ul class="list-unstyled fsize13" id="recent_tweets">
+            </ul>
+        </div>
+        <!-- /col #3 -->
+        <div class="spaced col-md-3 col-sm-4">
+            <h4>Keep <strong>Updated</strong></h4>
+            <h4><small><strong>Subscribe to our Newsletter</strong></small></h4>
+            <!-- Begin MailChimp Signup Form -->
+<div id="mc_embed_signup">
+    <form class="input-group" action="//github.us8.list-manage.com/subscribe/post?u=945d2a2edaa89aaabd396bc45&amp;id=5f9a7a993d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <input type="email" value="" name="EMAIL" class="form-control placeholder required email" id="mce-EMAIL" placeholder="E-mail Address">
+        <span class="input-group-btn">
+  <button class="btn btn-primary" type="submit" name="subscribe" id="mc-embedded-subscribe">SUBMIT</button>
+</span>
+        <div id="mce-responses" class="clear">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;">
+            <input type="text" name="b_945d2a2edaa89aaabd396bc45_5f9a7a993d" tabindex="-1" value="">
+        </div>
+        <div class="clear"></div>
+    </form>
+</div>
+<!--End mc_embed_signup-->
+
+        </div>
+    </div>
+  </div>
+  <hr />
+  <!-- <div class="copyright">
+    <div class="container text-center fsize12"></div>
+  </div> -->
+</footer>
+
+
+			<a href="#" id="toTop"></a>
+
+		</div><!-- /#wrapper -->
+
+		<script type="text/javascript" src="/theme_assets/plugins/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/jquery.isotope.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/masonry.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/knob/js/jquery.knob.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/flexslider/jquery.flexslider-min.js"></script>
+
+<!-- REVOLUTION SLIDER -->
+<script type="text/javascript" src="/theme_assets/plugins/revolution-slider/js/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="/theme_assets/plugins/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="/theme_assets/js/revolution_slider.js"></script>
+<script type="text/javascript" src="/js/jquery-toc.js"></script>
+<script type="text/javascript" src="/theme_assets/js/scripts.js"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+		<!-- REACTIVE MANIFESTO BANNER -->
+<a href="http://www.reactivemanifesto.org/"> <img style="border: 0; position: fixed; right: 0; top:0; z-index: 9000; max-width: 125px;" src="//d379ifj7s9wntv.cloudfront.net/reactivemanifesto/images/ribbons/we-are-reactive-red-right.png"> </a>
+
+	</body>
+</html>
